@@ -151,14 +151,15 @@ img { max-width: 100%; height: auto; }
     -webkit-backdrop-filter: var(--backdrop-blur); 
     border-top: var(--glass-border); 
     box-shadow: var(--glass-shadow); 
+    opacity: 0;
   }
-  .nav-toggle { display: block; } /* Ensure toggle shows on mobile */
+  .nav-toggle { display: none; } /* Ensure toggle shows on mobile */
   
   /* Stack layout on mobile */
   .resume {
     display: flex;
     flex-direction: column;
-    margin-left: 0; /* Reset desktop margin */
+    margin-left: 2rem; /* Reset desktop margin */
   }
 }
 
@@ -462,6 +463,7 @@ img { max-width: 100%; height: auto; }
   .section-title, .profile-description { text-align: initial; }
   .home-container { gap: 1.5rem; }
   .nav-list { display: flex; flex-direction: row; }
+  /* .nav-menu { opacity: 0;} */
   .interests-container { grid-template-columns: repeat(4, max-content); column-gap: 3.5rem; }
 }
 @media screen and (min-width: 1400px) {
