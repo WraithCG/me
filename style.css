@@ -342,8 +342,9 @@ img { max-width: 100%; height: auto; }
 .lightbox-nav:hover { color: var(--first-color); opacity: 1; text-shadow: 0 0 15px var(--first-color); }
 .lightbox-prev { left: -5rem; }
 .lightbox-next { right: -5rem; }
-@media screen and (max-width: 768px) { .lightbox-nav { font-size: 2rem; padding: 0.5rem; } .lightbox-plate { width: 85vw; } }
-
+@media screen and (max-width: 800px) { .lightbox-nav { font-size: 2rem; padding: 0.5rem; } .lightbox-plate { width: 85vw; } }
+.lightbox-prev { left: 0rem; }
+.lightbox-next { right: 0rem; }
 /* REVIEWS */
 .reviews-container { display: flex; flex-direction: column; gap: 1.5rem; }
 .review-card { padding: 1.5rem; border-left: 3px solid var(--first-color); background: rgba(255, 255, 255, 0.03); transition: all 0.3s ease; cursor: default; }
