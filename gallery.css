@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Science+Gothic:slnt,wdth,wght,CTRS@-2,100,350,17&display=swap&family=Geom:wght@100;300;600&display=swap');
+
+:root {
+    --first-color: rgba(152, 152, 152, 0.629);
+}
+
+/* Default, but JS tries to sync with parent */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Science Gothic', sans-serif;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.gallery-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.gallery-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 150px;
+    scroll-snap-align: start;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    position: relative; /* Added for link positioning */
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.gallery-thumb {
+    width: 150px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: .25rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.gallery-item:hover .gallery-thumb {
+    border-color: var(--first-color);
+    box-shadow: 0 0 20px var(--first-color);
+}
+
+.gallery-info {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: opacity 0.3s ease; /* Added transition */
+}
+
+/* Hide title/caption on hover to show links */
+.gallery-item:hover .gallery-info {
+    opacity: 1;
+}
+
+
+.gallery-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.gallery-caption {
+    font-size: 0.7rem;
+    color: var(--first-color);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+.gallery-item:hover .gallery-caption {
+    max-height: 50px;
+    opacity: 1;
+    margin-top: 0.2rem;
+}
+
+/* ===== NEW ASSET STORE LINK STYLES ===== */
+
+.gallery-item-links {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110px; /* Match thumbnail height */
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(2px);
+    border-radius: .25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    padding: 0.5rem;
+    box-sizing: border-box; /* Ensure padding doesn't break layout */
+}
+
+/* Show links on hover */
+.gallery-item:hover .gallery-item-links {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+}
+
+.gallery-item-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    scale: .78;
+    padding: 0.3rem 0.6rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    transition: transform 0.2s ease, background-color 0.2s, color 0.2s;
+    text-align: center;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* "Pop" effect on link hover */
+.gallery-item-links a:hover {
+    transform: scale(1.1);
+    background: var(--first-color);
+    border-color: var(--first-color);
+    color: #111;
+}
+
+.gallery-item-links a.hero-link {
+    background: var(--first-color);
+    color: #111;
+    font-weight: bold;
+    border-color: var(--first-color);
+}

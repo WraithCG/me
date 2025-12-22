@@ -1,0 +1,154 @@
+{
+    "navLogo": "A.D.",
+    "home": {
+        "name": "WRAITH_CG",
+        "profileImage": "untitled.pngdasac.png",
+        "professions": ["3D Artist", "Motion Designer", "Character Modeler"],
+        "contact": {
+            "address": "Kanpur, India",
+            "email": "cgblenddevb3d.com",
+            "phone": "0000000000"
+        }
+    },
+    "profileDescription": "Passionate 3D artist with over 4 years of experience specializing in 3d modeling, product visualization, and motion graphics.",
+    "quotes": [
+        { "text": "Arise, awake, and stop not till the goal is reached.", "author": "Swami Vivekananda" },
+        { "text": "You have the vision. I have the tools. Let it come to life.", "author": "" },
+        { "text": "Let's turn your 'what if' into 'what is'.", "author": "" },
+        { "text": "Ready to elevate your brand? Let's create something memorable together.", "author": "" },
+        { "text": "Don't just compete. Stand out.", "author": "" },
+        { "text": "The only solutions that are ever worth anything are the ones that are custom-made.", "author": "Satyajit Ray" },
+        { "text": "Great ideas deserve expert execution. Let's get started.", "author": "" },
+        { "text": "Good design is good business.", "author": "Thomas Watson Jr." },
+        { "text": "Quality is the best business plan.", "author": "John Lasseter" },
+        { "text": "If you think good design is expensive, you should look at the cost of bad design.", "author": "Ralf Speth" },
+        { "text": "Details are not just details. They make the design.", "author": "Charles Eames" },
+        { "text": "An artist's duty is to believe in beauty.", "author": "Ananda Coomaraswamy" },
+        { "text": "You can't cross the sea merely by standing and staring at the water.", "author": "Rabindranath Tagore" },
+        {"text": "I like to keep it simple, but significant.", "author": "" },
+        { "text": "Simplicity is the ultimate sophistication.", "author": "Leonardo Da Vinci" },
+        { "text": "I see what others don't, so you can show what others won't.", "author": "" },
+        { "text": "Everything is designed. Few things are designed well.", "author": "Brian Reed" }
+    ],
+    "education": [
+        {
+            "title": "Bachelor of Technology in Computer Science and Engineering",
+            "institution": "Pranveer Singh Institute of Technology",
+            "location": "India",
+            "score": "7.58 CGPA",
+            "year": "2022 - 20206"
+        },
+        {
+            "title": "Intermediate in Science",
+            "institution": "Sri Ram Education Centre",
+            "location": "India",
+            "score": "9.2 CGPA",
+            "year": "2020 - 2022"
+        }
+    ],
+    "skills": [
+[
+            { "name": "3D Modeling" },
+            { "name": "Texturing" },
+            { "name": "Motion Graphics" }
+        ],
+        [   
+            { "name": "Logo Design" },
+            { "name": "Product Visualization" },
+            { "name": "Game Prototyping" }
+        ]
+    ],
+    "software": [
+        {
+            "name": "Blender",
+            "experience": "4 Years",
+            "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z'/></svg>"
+        },
+        {
+            "name": "Unreal Engine 5",
+            "experience": "2 Years"
+        },
+        {
+            "name": "Adobe Illustrator",
+            "experience": "1 Year"
+        },
+        {
+            "name": "Adobe Photoshop",
+            "experience": "1 Year"
+        },
+        {
+            "name": "Adobe After Effects",
+            "experience": "1 Year"
+        }
+    ],
+    "experience": [
+        {
+            "title": "3D Artist",
+            "company": "MBS Studios",
+            "startDate": "2023-02-01",
+            "endDate": "2023-06-31",
+            "wordStartDate": "February 2023",
+            "wordEndDate": "June 2023",
+            "tasks": [
+                "Lead character modeling and texturing for major client projects.",
+                "Mentor junior artists and streamline the studio's rendering pipeline.",
+                "Collaborate with art directors to define visual style for new campaigns."
+            ]
+        }
+    ],
+    "interests": [
+{
+            "name": "Gaming",
+            "icon": "bx-joystick",
+            "favorites": ["Batman Arkham Knight", "Mad Max", "MGS V"]
+        },
+        {
+            "name": "Reading",
+            "icon": "bx-book",
+            "favorites": ["Biography", "Science Fiction", "Technology"]
+        },
+        {
+            "name": "Movies",
+            "icon": "bx-movie-play",
+            "favorites": ["Blade Runner 2049", "Dune", "Inception"]
+        }    
+    ],
+    "svg_socials": [
+        {
+            "name": "ArtStation",
+            "handle": "@alexdevlin_art",
+            "url": "https://www.artstation.com/",
+            "svg": "<svg fill=\"currentColor\" viewBox=\"0 0 32 32\" width='2em' height='2em' xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M13.73 5L26 27l1.994-4.512a3 3 0 0 0-.123-2.908L20.096 6.436A3 3 0 0 0 17.536 5zm-2.218 2.178L5.63 18h11.916zM4 21l2.172 4.342A3 3 0 0 0 8.854 27h13.712l-3.345-6z\"></path></svg>"
+        },
+        {
+            "name": "Instagram",
+            "handle": "@alex_3d",
+            "url": "https://www.instagram.com/",
+            "svg": "<svg fill=\"currentColor\" viewBox=\"0 0 24 24\" width='2em' height='2em' xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12.001 9a3 3 0 1 0 0 6a3 3 0 0 0 0-6m0-2a5 5 0 1 1 0 10a5 5 0 0 1 0-10m6.5-.25a1.25 1.25 0 0 1-2.5 0a1.25 1.25 0 0 1 2.5 0M12.001 4c-2.474 0-2.878.007-4.029.058c-.784.037-1.31.142-1.798.332a2.9 2.9 0 0 0-1.08.703a2.9 2.9 0 0 0-.704 1.08c-.19.49-.295 1.015-.331 1.798C4.007 9.075 4 9.461 4 12c0 2.475.007 2.878.058 4.029c.037.783.142 1.31.331 1.797c.17.435.37.748.702 1.08c.337.336.65.537 1.08.703c.494.191 1.02.297 1.8.333C9.075 19.994 9.461 20 12 20c2.475 0 2.878-.007 4.029-.058c.782-.037 1.308-.142 1.797-.331a2.9 2.9 0 0 0 1.08-.703c.337-.336.538-.649.704-1.08c.19-.492.296-1.018.332-1.8c.052-1.103.058-1.49.058-4.028c0-2.474-.007-2.878-.058-4.029c-.037-.782-.143-1.31-.332-1.798a2.9 2.9 0 0 0-.703-1.08a2.9 2.9 0 0 0-1.08-.704c-.49-.19-1.016-.295-1.798-.331C14.926 4.006 14.54 4 12 4m0-2c2.717 0 3.056.01 4.123.06c1.064.05 1.79.217 2.427.465c.66.254 1.216.598 1.772 1.153a4.9 4.9 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428c.047 1.066.06 1.405.06 4.122s-.01 3.056-.06 4.122s-.218 1.79-.465 2.428a4.9 4.9 0 0 1-1.153 1.772a4.9 4.9 0 0 1-1.772 1.153c-.637.247-1.363.415-2.427.465c-1.067.047-1.406.06-4.123.06s-3.056-.01-4.123-.06c-1.064-.05-1.789-.218-2.427-.465a4.9 4.9 0 0 1-1.772-1.153a4.9 4.9 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.012 15.056 2 14.717 2 12s.01-3.056.06-4.122s.217-1.79.465-2.428a4.9 4.9 0 0 1 1.153-1.772A4.9 4.9 0 0 1 5.45 2.525c.637-.248 1.362-.415 2.427-.465C8.945 2.013 9.284 2 12.001 2\"></path></svg>"
+        },
+        {
+            "name": "YouTube",
+            "handle": "@alexdevlin",
+            "url": "https://www.youtube.com/",
+            "svg": "<svg fill=\"currentColor\" viewBox=\"0 0 24 24\" width='2em' height='2em' xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M22.8 8.6c-.2-1.5-.4-2.6-1-3C21.2 5.1 16 5 12 5s-9.2.1-9.8.6c-.6.4-.8 1.5-1 3S1 11 1 12s0 1.9.2 3.4s.4 2.6 1 3c.6.5 5.8.6 9.8.6s9.2-.1 9.8-.6c.6-.4.8-1.5 1-3S23 13 23 12s0-1.9-.2-3.4m-12.8 7V8.4l6 3.6z\"></path></svg>"
+        },
+        {
+            "name": "DeviantArt",
+            "handle": "alex-devlin",
+            "url": "https://www.deviantart.com/",
+            "svg": "<svg fill=\"currentColor\" viewBox=\"0 0 16 16\" width='1.5em' height='1.5em' xmlns=\"http://www.w3.org/2000/svg\"><g><path d=\"M12.953 2.909V0h-2.909l-.291.294L8.378 2.91l-.431.291h-4.9v3.994h2.694l.241.291l-2.934 5.606v2.909h2.909l.291-.294l1.375-2.616l.431-.291h4.9V8.806H10.26l-.241-.294z\"></path></svg>"
+        },
+        {
+            "name": "Reddit",
+            "handle": "u/alexdevlin",
+            "url": "https://www.reddit.com/",
+            "svg": "<svg fill=\"currentColor\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10.75 13.04c0-.57-.47-1.04-1.04-1.04s-1.04.47-1.04 1.04a1.04 1.04 0 1 0 2.08 0m3.34 2.37c-.45.45-1.41.61-2.09.61s-1.64-.16-2.09-.61a.26.26 0 0 0-.38 0a.26.26 0 0 0 0 .38c.71.71 2.07.77 2.47.77s1.76-.06 2.47-.77a.26.26 0 0 0 0-.38c-.1-.1-.27-.1-.38 0m.2-3.41c-.57 0-1.04.47-1.04 1.04s.47 1.04 1.04 1.04s1.04-.47 1.04-1.04S14.87 12 14.29 12\"/><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m5.8 11.33c.02.14.03.29.03.44c0 2.24-2.61 4.06-5.83 4.06s-5.83-1.82-5.83-4.06c0-.15.01-.3.03-.44c-.51-.23-.86-.74-.86-1.33a1.455 1.455 0 0 1 2.47-1.05c1.01-.73 2.41-1.19 3.96-1.24l.74-3.49c.01-.07.05-.13.11-.16c.06-.04.13-.05.2-.04l2.42.52a1.04 1.04 0 1 1 .93 1.5c-.56 0-1.01-.44-1.04-.99l-2.17-.46l-.66 3.12c1.53.05 2.9.52 3.9 1.24a1.455 1.455 0 1 1 1.6 2.38\"></path></svg>"
+        },
+        {
+            "name": "Discord",
+            "handle": "alexdevlin#1234",
+            "url": "https://discord.com/",
+            "svg": "<svg fill=\"currentColor\" viewBox=\"0 0 24 24\" width='2em' height='2em' xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.1.1 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.1 16.1 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02M8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12m6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12\"></path></svg>"
+        }
+    ]
+}

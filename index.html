@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Artist Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+</head>
+
+<body>
+    <!-- Added Starfield Canvas -->
+    <canvas id="canvas"></canvas>
+    
+    <!-- SVG Filter for Lightning Effects -->
+    <svg class="svg-container">
+        <defs>
+            <filter id="turbulent-displace" colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%"
+                height="140%">
+                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
+                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
+                    <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
+                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
+                    <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="2" />
+                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise3">
+                    <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="2" />
+                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise4">
+                    <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
+                </feOffset>
+                <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
+                <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
+                <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
+                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="30" xChannelSelector="R"
+                    yChannelSelector="B" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="l-header" id="header">
+        <nav class="nav bd-container">
+            <a href="#" class="nav-logo" id="nav-logo"></a>
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#home" class="nav-link active-link"><i class="bx bx-home"></i>Home</a>
+                    </li>
+                    <li class="nav-item"><a href="#profile" class="nav-link"><i class="bx bx-user"></i>Profile</a></li>
+                    <li class="nav-item"><a href="#education" class="nav-link"><i class="bx bx-book"></i>Education</a>
+                    </li>
+                    <li class="nav-item"><a href="#skills" class="nav-link"><i class="bx bx-receipt"></i>Skills</a></li>
+                    <li class="nav-item"><a href="#experience" class="nav-link"><i
+                                class="bx bx-briefcase-alt"></i>Experience</a></li>
+                    <li class="nav-item"><a href="#portfolio-section" class="nav-link"><i
+                                class='bx bx-cube-alt'></i>Portfolio</a></li>
+                </ul>
+            </div>
+            <div class="nav-toggle" id="nav-toggle"><i class="bx bx-grid-alt"></i></div>
+        </nav>
+    </header>
+
+    <main class="l-main bd-container">
+        <div class="resume" id="area-cv">
+            <!-- === LEFT COLUMN === -->
+            <div class="resume-left">
+                <section class="home" id="home">
+                    <div class="home-container section bd-grid">
+                        <div class="home-data bd-grid" id="home-data">
+                            <div id="profile-container" class="home-img" title="Click to Contact Me!">
+                                <img src="" alt="Profile Picture" class="profile-avatar" id="profile-img">
+                            </div>
+                            <h1 class="home-title" id="home-title"></h1>
+                            <div class="home-professions-grid" id="home-professions"></div>
+                            <div class="contact-drawer" id="contact-drawer">
+                                <div class="home-address bd-grid" id="contact-info"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="drawer" id="profile">
+                    <h2 class="drawer-title section-title">Profile</h2>
+                    <div class="drawer-content section">
+                        <p class="profile-description" id="profile-description"></p>
+                    </div>
+                </div>
+                <div class="drawer" id="education">
+                    <h2 class="drawer-title section-title">Education</h2>
+                    <div class="drawer-content section">
+                        <div class="education-container bd-grid" id="education-container"></div>
+                    </div>
+                </div>
+                <div class="drawer" id="skills">
+                    <h2 class="drawer-title section-title">Skills</h2>
+                    <div class="drawer-content section">
+                        <div class="skills-content bd-grid">
+                            <ul class="skills-data" id="skills-col1"></ul>
+                            <ul class="skills-data" id="skills-col2"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="drawer" id="software">
+                    <h2 class="drawer-title section-title">Software</h2>
+                    <div class="drawer-content section">
+                        <div class="software-container bd-grid" id="software-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- === RIGHT COLUMN === -->
+            <div class="resume-right" id="portfolio-section">
+                <div class="drawer" id="experience">
+                    <h2 class="drawer-title section-title">Experience</h2>
+                    <div class="drawer-content section">
+                        <div class="experience-container bd-grid" id="experience-container"></div>
+                    </div>
+                </div>
+
+                <!-- IFRAME MEDIA DRAWERS -->
+                <div class="drawer">
+                    <h2 class="drawer-title section-title">3D Renders</h2>
+                    <div class="drawer-content section"><iframe class="gallery-iframe"
+                            src="gallery.html?section=renders"></iframe></div>
+                </div>
+                <div class="drawer">
+                    <h2 class="drawer-title section-title">3D Videos</h2>
+                    <div class="drawer-content section"><iframe class="gallery-iframe"
+                            src="gallery.html?section=videos"></iframe></div>
+                </div>
+                <!-- <div class="drawer">
+                    <h2 class="drawer-title section-title">Motion Graphics</h2>
+                    <div class="drawer-content section"><iframe class="gallery-iframe"
+                            src="gallery.html?section=motion_graphics"></iframe></div>
+                </div> -->
+                <!-- <div class="drawer">
+                    <h2 class="drawer-title section-title">Product Viz</h2>
+                    <div class="drawer-content section"><iframe class="gallery-iframe"
+                            src="gallery.html?section=product_viz"></iframe></div>
+                </div> -->
+                <!-- <div class="drawer">
+                    <h2 class="drawer-title section-title">Character Art</h2>
+                    <div class="drawer-content section"><iframe class="gallery-iframe"
+                            src="gallery.html?section=character_art"></iframe></div>
+                </div> -->
+                <!-- <div class="drawer">
+                    <h2 class="drawer-title section-title">Logo Designs</h2>
+                    <div class="drawer-content section"><iframe class="gallery-iframe"
+                            src="gallery.html?section=logo_designs"></iframe></div>
+                </div> -->
+                <div class="drawer">
+                    <h2 class="drawer-title section-title">Asset Store</h2>
+                    <div class="drawer-content section"><iframe class="gallery-iframe"
+                            src="gallery.html?section=assets"></iframe></div>
+                </div>
+
+                <div class="drawer" id="reviews-drawer">
+                    <h2 class="drawer-title section-title">Client Reviews</h2>
+                    <div class="drawer-content section">
+                        <div class="reviews-container" id="reviews-container"></div>
+                    </div>
+                </div>
+                <div class="drawer" id="interests">
+                    <h2 class="drawer-title section-title">Interests</h2>
+                    <div class="drawer-content section">
+                        <div class="interests-container bd-grid" id="interests-container"></div>
+                    </div>
+                </div>
+
+                <div id="thought-of-the-day" class="glass-panel-quote">
+                    <p class="quote-text" id="quote-text"></p>
+                    <footer class="quote-author" id="quote-author"></footer>
+                </div>
+            </div>
+            <!-- <div class="resume-bottom-line"></div> -->
+        </div>
+    </main>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-plate glass-panel">
+            <button class="lightbox-nav lightbox-prev"><i class='bx bx-chevron-left'></i></button>
+            <button class="lightbox-nav lightbox-next"><i class='bx bx-chevron-right'></i></button>
+            <div id="lightbox-media-container" class="lightbox-content"></div>
+            <div class="lightbox-details">
+                <h3 class="lightbox-title" id="lightbox-title"></h3>
+                <p class="lightbox-caption" id="lightbox-caption"></p>
+                <div class="lightbox-links" id="lightbox-links"></div>
+                <div id="lightbox-meta"></div>
+                <div class="lightbox-description" id="lightbox-description"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING UI -->
+    <a href="#" class="scrolltop" id="scroll-top"><i class="bx bx-up-arrow-alt scrolltop-icon"></i></a>
+
+    <!-- Side panels for clock, contact, etc. -->
+    <div class="side-panels">
+
+        <!-- ===== NEW TIME CARD START ===== -->
+        <div class="time-card glass-panel">
+            <p class="time-text">
+                <span id="time-card-text">11:11</span>
+                <span class="time-sub-text" id="time-card-subtext">PM</span>
+            </p>
+            <p class="day-text" id="time-card-day">Wednesday, June 15th</p>
+            <div class="time-card-icon" id="time-card-icon">
+                <!-- Moon Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" stroke-width="0" fill="currentColor" stroke="currentColor">
+                    <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path>
+                    <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path>
+                </svg>
+            </div>
+            <!-- Sun Icon (hidden by default) -->
+            <div class="time-card-icon" id="time-card-icon-sun" style="display: none;">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" stroke-width="0" fill="currentColor" stroke="currentColor">
+                    <path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+                </svg>
+            </div>
+        </div>
+        <!-- ===== NEW TIME CARD END ===== -->
+
+        <div class="contact-form-container">
+            <form class="form glass-panel" id="contact-form">
+                <div class="descr">Contact Me</div>
+                <div class="input"><input required autocomplete="off" type="text" name="name" id="contact-name"><label
+                        for="contact-name">Name</label></div>
+                <div class="input"><input required autocomplete="off" name="email" type="email"
+                        id="contact-email"><label for="contact-email">E-mail</label></div>
+                <div class="input"><textarea required cols="30" rows="1" name="message"
+                        id="contact-message"></textarea><label for="contact-message">Message</label></div>
+                <div id="contact-button-wrapper" class="contact-button-wrapper"><button type="submit"
+                        id="contact-button">Send message →</button></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="floating-socials-container" class="button-container glass-panel">
+    </div>
+
+    <div class="page-top-line"></div>
+    <div class="page-bottom-line"></div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
