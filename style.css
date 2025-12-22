@@ -83,7 +83,7 @@ body {
 body.theme-cosmic { background-image: linear-gradient(135deg, #232526 0%, #414345 50%, #5c2563 100%); --first-color-hue: 280; --first-color: hsl(280, 69%, 61%); --glass-bg: rgba(40, 40, 40, 0.25); --glass-border: 1px solid rgba(255, 255, 255, 0.1); }
 body.theme-cyberpunk { background-image: linear-gradient(180deg, #35373B, #3a2d48, #8A2BE2); --first-color-hue: 277; --first-color: hsl(277, 69%, 61%); --glass-bg: rgba(40, 40, 40, 0.4); }
 body.theme-royal { background-image: linear-gradient(270deg, #35373B, #48392d, #DAA520 100%); --first-color-hue: 45; --first-color: hsl(45, 69%, 61%); --glass-bg: rgba(20, 20, 20, 0.6); }
-body.theme-metal { background-image: linear-gradient(160deg, #34495e 0%, #c5e4f9 100%); --first-color-hue: 210; --first-color: hsl(210, 69%, 61%); --glass-bg: rgba(40, 50, 60, 0.4); }
+body.theme-metal { background-image: linear-gradient(153deg, #445f7a 0%, #c5e4f992 100%); --first-color-hue: white; --first-color: hsl(0, 0%, 100%); --glass-bg: rgba(40, 50, 60, 0.4); }
 
 h1, h2, h3 { 
     margin: 0; 
