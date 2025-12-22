@@ -460,8 +460,11 @@ img { max-width: 100%; height: auto; }
 @keyframes lightning-full-border { 0% { clip-path: polygon(0 0, 0 0, 0 0, 0 0, 0 0, 0 0); opacity: 1;} 15% { clip-path: polygon(0 0, 100% 0, 100% 0, 100% 0, 100% 0, 0 0); } 30% { clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 0 0); } 45% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 100%, 0 0); } 60% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 0 0); } 80% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 0 0); opacity: 1; } 100% { opacity: 0; } }
 
 @media screen and (max-width: 968px) { 
-    .contact-form-container, .time-card, .side-panels { display: none; } 
+    .contact-form-container { display: none; } 
     .lightning-effect, .lightning-overlay { display: flex; }
+    .profile-avatar {scale: .64;}
+    .time-card { opacity: 0; display: none;}
+    .side-panels { max-height: fit-content; }
     .button-container { scale: .75; flex-direction: row; height: .25rem; width: max-content; top: 88%; transform: translateX(-40px);}
 }
 

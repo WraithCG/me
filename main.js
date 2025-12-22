@@ -243,7 +243,11 @@ function initializeInteractivity(portfolioData) {
 
     // Lightning FX triggers
     const profileContainer = document.getElementById('profile-container');
-    profileContainer.addEventListener('click', (e) => { e.stopPropagation(); triggerLightning(profileContainer); });
+    profileContainer.addEventListener('click', (e) => { 
+        e.stopPropagation(); 
+        triggerLightning(profileContainer); 
+        // console.log("Profile lightning triggered");
+    });
     document.addEventListener('click', () => document.querySelectorAll('.resume-bottom-line, .page-bottom-line, .page-top-line').forEach(l => triggerLightning(l)));
 
     // Contact Form Logic
@@ -269,7 +273,7 @@ function initializeInteractivity(portfolioData) {
     // Form Submission
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault(); 
-        const key = "YOUR_ACCESS_KEY_HERE"; 
+        const key = "46fc9be7-5f6d-42d1-a21a-844296f6d2ba"; 
         if(key.includes("YOUR_")) { alert("Update Access Key in main.js"); return; }
         
         btn.disabled = true; btn.textContent = "Sending...";
@@ -294,6 +298,7 @@ function initializeInteractivity(portfolioData) {
             updateLightbox(); 
         } 
     });
+
     document.querySelector('.lightbox-prev').addEventListener('click', (e)=>{e.stopPropagation(); navLightbox(-1)});
     document.querySelector('.lightbox-next').addEventListener('click', (e)=>{e.stopPropagation(); navLightbox(1)});
     document.addEventListener('keydown', (e) => { 
@@ -305,6 +310,20 @@ function initializeInteractivity(portfolioData) {
     });
     document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => { if(e.target===lightbox) closeLightbox(); });
+
+    document.getElementById('profile-img').addEventListener('click', () => {
+        console.log("Profile image clicked");
+        if( screen.width <= 968 ) {
+        const contact = document.getElementById('contact');
+        if (contact.style.display === "none" || getComputedStyle(contact).display === "none") {
+            contact.style.display = "flex";
+            contact.right = "50%";
+        } else {
+            contact.style.display = "none";
+            console.log("Contact section hidden");
+        }
+    }
+    });
 }
 
 // === HELPER FUNCTIONS ===
