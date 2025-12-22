@@ -16,7 +16,7 @@
   --backdrop-blur: blur(10px);
   
   /* 1. Added new variable for left column ratio */
-  --left-column-fr: 0.45fr; /* Was 0.5fr, shifts divider left */
+  --left-column-fr: 1fr; /* Was 0.5fr, shifts divider left */
 
   /* --- TYPOGRAPHY SYSTEM --- */
   /* Base Fonts */
@@ -115,7 +115,7 @@ img { max-width: 100%; height: auto; }
     font-family: var(--heading-font); /* Applied Heading Font */
     letter-spacing: var(--heading-letter-spacing);
 }
-.bd-container { max-width: 1000px; width: calc(100% - 3rem); margin-left: var(--m3); margin-right: var(--m3); transform: translateX(-36px) translateY(-16px);}
+.bd-container { max-width: 960px; width: calc(100% - 3rem); margin-left: var(--m3); margin-right: var(--m3); transform: translateX(-36px) translateY(-16px);}
 .bd-grid { display: grid; gap: 2rem; }
 
 .glass-panel { padding: 1.5rem 2rem; border-radius: 1rem; background: var(--glass-bg); backdrop-filter: var(--backdrop-blur); -webkit-backdrop-filter: var(--backdrop-blur); border: var(--glass-border); box-shadow: var(--glass-shadow); position: relative; }
@@ -161,9 +161,12 @@ img { max-width: 100%; height: auto; }
     flex-direction: column;
     margin-left: 2rem; /* Reset desktop margin */
   }
+
+  .bd-container { max-width: auto; transform: translateX(-10px) translateY(-16px);}
+
 }
 
-.nav-toggle, .nav-logo { color: var(--title-color); font-weight: var(--font-medium); text-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.nav-toggle, .nav-logo {position:fixed; font-size: 8px; left:2rem; color: var(--title-color); font-weight: var(--font-medium); text-shadow: 0 1px 3px rgba(0,0,0,0.1); opacity: 0.5;}
 .nav-toggle { font-size: 1.2rem; cursor: pointer; }
 .nav-item { text-align: center; }
 .nav-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -268,6 +271,7 @@ img { max-width: 100%; height: auto; }
 }
 .education-extra { display: flex; justify-content: space-between; font-size: var(--smaller-font-size); color: var(--text-color-light); }
 
+
 .skills-content { grid-template-columns: repeat(1, 1fr); }
 .skills-name { 
     display: flex; align-items:center; margin-bottom: var(--m3); 
@@ -276,12 +280,17 @@ img { max-width: 100%; height: auto; }
 }
 .skills-circle { display: inline-block; width: 5px; height: 5px; background-color: var(--text-color); border-radius: 50%; margin-right: .75rem; }
 .skills-name svg { width: 20px; height: 20px; margin-right: .75rem; fill: currentColor; }
+#skill-container {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 8rem;
+}
 
 .software-container { gap: .75rem; }
-.software-content { display: flex; justify-content: space-between; align-items: center;  font-family: var(--list-font); /* Applied List Font */ letter-spacing: var(--list-letter-spacing);}
-.software-info { display: flex; align-items: center; }
+.software-content { display: flex; justify-content: space-between; align-items: center;  font-family: var(--list-font); /* Applied List Font */ letter-spacing: var(--date-letter-spacing); }
+.software-info { display: flex; align-items: center; flex-direction: row;}
 .software-info svg { width: 20px; height: 20px; margin-right: .75rem; fill: currentColor; }
-.software-experience { font-size: var(--smaller-font-size); color: var(--text-color-light); padding-left: 5px; font-family: var(--date-font); }
+.software-experience { font-size: var(--smaller-font-size); color: var(--text-color-light); padding-left: 0px; font-family: var(--date-font);}
 
 .gallery-iframe { width: 100%; height: 200px; border: none; border-radius: .5rem; background-color: transparent; display: block; padding-top: 10px;}
 
@@ -373,7 +382,7 @@ img { max-width: 100%; height: auto; }
 .favorites-list li:not(:last-child) { margin-bottom: .25rem; }
 
 /* FLOATING SOCIALS */
-.button-container { position: fixed; top: 50%; height: max-content; width: 6rem; transform: translateY(-50%) translateX(39%); left: 1rem; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2.5rem; z-index: var(--z-fixed); padding: 1.5rem 1rem; border-radius: 1rem; background: var(--glass-bg); backdrop-filter: var(--backdrop-blur); -webkit-backdrop-filter: var(--backdrop-blur); border: var(--glass-border); box-shadow: var(--glass-shadow); }
+.button-container { position: fixed; top: 45.5%; height: max-content; width: 6rem; transform: translateY(-50%) translateX(39%); left: 1rem; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.5rem; z-index: var(--z-fixed); padding: 1.5rem 1rem; border-radius: 1rem; background: var(--glass-bg); backdrop-filter: var(--backdrop-blur); -webkit-backdrop-filter: var(--backdrop-blur); border: var(--glass-border); box-shadow: var(--glass-shadow); }
 .button-container .button { transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.4s; cursor: pointer; text-decoration: none; color: var(--text-color-light); width: 40px; height: 40px; border-radius: 50%; background-color: rgba(0,0,0,0.2); border: 2px solid var(--text-color-light); transition: all 0.45s; display: flex; justify-content: center; align-items: center; position: relative; z-index: 2;}
 .button-container .button:hover { scale:1.25; transform: rotate(360deg); background-color: var(--first-color); border-color: var(--first-color); box-shadow: 0 0 20px var(--first-color); color: var(--body-color); }
 .button-container .button .btn-svg { fill: currentColor; transition: all 0.45s; width: 22px; height: 22px; }
@@ -397,7 +406,7 @@ img { max-width: 100%; height: auto; }
 
 .scrolltop { position: fixed; right: 1rem; bottom: -20%; display: flex; justify-content: center; align-items: center; padding: 0.5rem; z-index: var(--z-tooltip); transition: .4s; visibility: hidden; border-radius: .5rem; background: var(--glass-bg); backdrop-filter: var(--backdrop-blur); -webkit-backdrop-filter: var(--backdrop-blur); border: var(--glass-border); }
 .show-scroll { bottom: 5rem; }
-.side-panels { position: fixed; top: 23.5%; right: 1.25rem; transform: translateY(-50%); z-index: var(--z-fixed); display: flex; flex-direction: column; gap: 1.5rem; }
+.side-panels { position: fixed; top: 19%; right: 1.25rem; transform: translateY(-50%); z-index: var(--z-fixed); display: flex; flex-direction: column; gap: 1.5rem; }
 
 /* UPDATED: Contact Form is permanently visible */
 .contact-form-container { 
@@ -453,7 +462,7 @@ img { max-width: 100%; height: auto; }
 @media screen and (max-width: 968px) { .button-container, .contact-form-container, .lightning-effect, .lightning-overlay, .time-card, .side-panels { display: none; } }
 @media screen and (max-width: 568px) { .nav-list { grid-template-columns: repeat(3, 1fr); } }
 @media screen and (min-width: 968px) {
-  body { margin: 5% 0; }
+  body { margin: 5% 0;}
   .bd-container { margin-left: auto; margin-right: auto; }
   .l-header, .scrolltop { display: none; }
   /* 1. Using the new --left-column-fr variable */
