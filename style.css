@@ -197,6 +197,7 @@ img { max-width: 100%; height: auto; }
     font-size: var(--h1-font-size); 
     font-family: var(--heading-font); /* Applied Heading Font */
     letter-spacing: var(--l3);
+    text-shadow: 0px 0px 20px hsla(var(--first-color-hue), 69%, 61%, 0.3);
 }
 .home-professions-grid { display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-top: var(--m2); margin-bottom: var(--m2); padding: 0 2rem;}
 .profession-item { 
@@ -460,11 +461,11 @@ img { max-width: 100%; height: auto; }
 @keyframes lightning-full-border { 0% { clip-path: polygon(0 0, 0 0, 0 0, 0 0, 0 0, 0 0); opacity: 1;} 15% { clip-path: polygon(0 0, 100% 0, 100% 0, 100% 0, 100% 0, 0 0); } 30% { clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 0 0); } 45% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 100%, 0 0); } 60% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 0 0); } 80% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 0, 0 0); opacity: 1; } 100% { opacity: 0; } }
 
 @media screen and (max-width: 968px) { 
-    .contact-form-container { display: none; } 
+    .contact-form-container { display: none; transform: translateY(400px) } 
     .lightning-effect, .lightning-overlay { display: flex; }
-    .profile-avatar {scale: .64;}
-    .time-card { opacity: 0; display: none;}
-    .side-panels { max-height: fit-content; }
+    .home-information {text-shadow: 0px 0px 5px hsl(var(--first-color-hue), 100%, 83%);}
+    .time-card {  transform: translateY(-300px); } 
+    .side-panels { max-height: fit-content; transform: translateY(-500px)}
     .button-container { scale: .75; flex-direction: row; height: .25rem; width: max-content; top: 88%; transform: translateX(-40px);}
 }
 

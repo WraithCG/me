@@ -311,7 +311,7 @@ function initializeInteractivity(portfolioData) {
     document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => { if(e.target===lightbox) closeLightbox(); });
 
-    document.getElementById('profile-img').addEventListener('click', () => {
+    document.getElementById('home-data').addEventListener('click', () => {
         console.log("Profile image clicked");
         if( screen.width <= 968 ) {
         const contact = document.getElementById('contact');
