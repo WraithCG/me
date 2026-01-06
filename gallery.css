@@ -46,12 +46,13 @@ body {
     flex: 0 0 150px;
     scroll-snap-align: start;
     cursor: pointer;
+    scale: .87;
     transition: transform 0.3s ease;
     position: relative; /* Added for link positioning */
 }
 
 .gallery-item:hover {
-    transform: scale(1.05);
+    transform: scale(1.25);
     z-index: 2;
 }
 
@@ -179,20 +180,21 @@ body {
 .scroll-pointer {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
-    width: 2rem;
+    transform: translateY(-60%);
+    width: 4rem;
     height: 3rem;
-    background: var(--pointer-bg);
-    color: var(--pointer-color);
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--first-color);
     display: flex;
+    border-radius: 10%;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     z-index: 20;
     opacity: 0;
-    pointer-events: none; /* Initially allow clicks to pass through if hidden */
-    transition: opacity 0.3s ease, background-color 0.2s ease;
-    border-radius: 0.25rem;
+    /* pointer-events: none; Initially allow clicks to pass through if hidden */
+    transition: opacity 0.8s ease, background-color 0.6s ease transform 1s ease-in-out;
+    /* border-radius: 0.25rem; */
 }
 
 /* Show pointer when active class is added by JS */
@@ -202,18 +204,28 @@ body {
 }
 
 .scroll-pointer:hover {
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    /* background: var(--first-color); */
+    color: #ffffff74;
+    /* transform: translateY(-75%); */
 }
 
 .scroll-pointer-left {
-    left: 0.5rem;
+    left: -1rem;
+    /* Solid color on the left, fading to transparent on the right */
+    background: linear-gradient(to right, rgb(91 91 91 / 75%), rgba(34, 193, 195, 0));
 }
 
 .scroll-pointer-right {
-    right: 0.5rem;
+    right: -1rem;
+    /* Solid color on the left, fading to transparent on the right */
+    background: linear-gradient(to left, rgb(91 91 91 / 75%), rgba(34, 193, 195, 0));;
 }
 
 .scroll-pointer i {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+}
+
+.scroll-pointer i:hover {
+    font-size: 2rem;
+    color: rgb(255, 255, 255);
 }

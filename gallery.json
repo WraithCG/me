@@ -149,7 +149,7 @@
     "assets": [
         {
             "title": "Endless Runner Game Creator Template with Motion Matching",
-            "previewTitle" : "Endless Runner Game Creator<br>Template with Motion Matching",
+            "previewTitle" : "Endless Runner Game<br>Creator Template v1.3",
             "caption": "Game Template",
             "date": "2025-10-19",
             "media": [
@@ -163,7 +163,18 @@
                 { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/c850be04-c26a-4b15-9d45-60b952d04ec5/a75706b7-089f-44b7-a267-9edfe1a629d2.jpg" }
             ],
             "software": ["Unreal Engine 5"],
-            "description": "This template has got you covered with everything you need for making an endless runner game. This template includes a fully functional endless runner game with motion matching, customizable character, obstacles, power-ups, and more. You can easily modify the game mechanics and visuals to fit your game's theme and style. Whether you're a beginner or an experienced developer, this template provides a solid foundation for your endless runner game development. Get started today!",
+            "description": "This template is built on modular architecture, allowing you to easily modify the game mechanics and visuals to fit your game's theme and style. Whether you're a beginner or an experienced developer, this template provides a solid foundation for your next game. <br><b>...Start Running Now...! </b>",
+            "features": [
+                "Toggle Control Gameplay Features",
+                "Customized Motion Matching Setup",
+                "Multiple Game Modes",
+                "Character Customization System v1.1",
+                "Character Selection System v1.2",
+                "Obstacles, Collectibles & Power-Ups",
+                "Environment Creation Tools v1.0",
+                "Widgets & Management System v1.1",
+                "Extensive Documentation"
+            ],
             "links": [
                 { "name": "Get on FAB", "url": "https://fab.com/s/17403ac1d4d5", "hero": true }
             ]
@@ -181,13 +192,13 @@
                 { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/7dc37c3a-96e9-4c16-924a-e2150b8bdf3a/c03258a4-5d0f-4a67-9cfc-89840e069b68.jpg" }
             ],
             "software": ["Unreal Engine 5"],
-            "description": "This collection of game systems for Unreal Engine 5 is designed to help you get started quickly with your game development. It includes a free version of Infinite Runner Game Creator template along with additional systems such as Character Selection System, Character Customization System and Widgets Management System. These systems are modular and can be easily integrated into your existing projects. Whether you're a beginner or an experienced developer, this collection provides a solid foundation for your game development needs.",
+            "description": "This is a free version of Infinite Runner Game Creator template. Whether you're a beginner or an experienced developer, this collection provides a solid foundation for your game development needs.<br><b>...Add to your library now...!</b>",
             "features": [
-                "15 Unique Rock Meshes",
-                "4K PBR Textures (Albedo, Normal, Roughness)",
-                "LODs included (LOD0 - LOD3)",
-                "Game-Ready Topology",
-                "Collision Meshes Included"
+                "Character Customization System",
+                "Character Selection System",
+                "Obstacles Spawner System",
+                "Widgets & Management System",
+                "Extensive Documentation"
             ],
             "links": [
                 { "name": "FREE on FAB", "url": "https://fab.com/s/0bac8dc552db", "hero": true }

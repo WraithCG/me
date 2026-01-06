@@ -105,23 +105,23 @@ function populateData(data) {
     }
 
     // Experience Timeline
-    if (data.experience) {
-        document.getElementById('experience-container').innerHTML = data.experience.map((e,i) => `
-            <div class="experience-content">
-                <div class="experience-time">
-                    <span class="experience-rounder"></span>
-                    ${i < data.experience.length-1 ? '<span class="experience-line"></span>' : ''}
-                </div>
-                <div class="experience-data bd-grid">
-                    <div class="experience-title-group">
-                        <h3 class="experience-title">${e.title}</h3>
-                        <span class="experience-duration">${calculateDuration(e.startDate, e.endDate)}</span>
-                    </div>
-                    <span class="experience-company">${e.company}</span>
-                    ${e.tasks ? `<ul class="experience-tasks">${e.tasks.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
-                </div>
-            </div>`).join('');
-    }
+    // if (data.experience) {
+    //     document.getElementById('experience-container').innerHTML = data.experience.map((e,i) => `
+    //         <div class="experience-content">
+    //             <div class="experience-time">
+    //                 <span class="experience-rounder"></span>
+    //                 ${i < data.experience.length-1 ? '<span class="experience-line"></span>' : ''}
+    //             </div>
+    //             <div class="experience-data bd-grid">
+    //                 <div class="experience-title-group">
+    //                     <h3 class="experience-title">${e.title}</h3>
+    //                     <span class="experience-duration">${calculateDuration(e.startDate, e.endDate)}</span>
+    //                 </div>
+    //                 <span class="experience-company">${e.company}</span>
+    //                 ${e.tasks ? `<ul class="experience-tasks">${e.tasks.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
+    //             </div>
+    //         </div>`).join('');
+    // }
 
     // Interests
     if (data.interests) {

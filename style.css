@@ -293,11 +293,13 @@ img { max-width: 100%; height: auto; }
 .software-info svg { width: 20px; height: 20px; margin-right: .75rem; fill: currentColor; }
 .software-experience { font-size: var(--smaller-font-size); color: var(--text-color-light); padding-left: 0px; font-family: var(--date-font);}
 
-.gallery-iframe { width: 100%; height: 200px; border: none; border-radius: .5rem; background-color: transparent; display: block; padding-top: 10px;}
+.gallery-iframe { width: 100%; height: 200px; border: none; border-radius: .5rem; background-color: transparent; display: block;}
 
 /* LIGHTBOX */
-.lightbox { display: none; position: fixed; z-index: var(--z-lightbox); left: 0; top: 0; width: 100%; height: 100%; padding: 2rem; background-color: hsla(var(--first-color-hue), 69%, 10%, 0.8); backdrop-filter: var(--backdrop-blur); -webkit-backdrop-filter: var(--backdrop-blur); align-items: center; justify-content: center; }
+.lightbox {  display: none; position: fixed; z-index: var(--z-lightbox); left: 0; top: 0; width: 100%; height: 100%; padding: 2rem; background-color: hsla(var(--first-color-hue), 69%, 10%, 0.8); backdrop-filter: var(--backdrop-blur); -webkit-backdrop-filter: var(--backdrop-blur); align-items: center; justify-content: center; }
 .lightbox.active { display: flex; }
+.lightbox-iframe { width: 100%; height: 100%; border: none; flex-shrink: 0; }
+
 /* 3. Added gap */
 .lightbox-plate { display: flex; flex-direction: column; width: 90vw; height: 90vh; max-width: 1200px; max-height: 800px; position: relative; gap: 1.5rem; }
 @media screen and (min-width: 768px) { .lightbox-plate { flex-direction: row; } }
@@ -306,12 +308,12 @@ img { max-width: 100%; height: auto; }
 .lightbox-content::-webkit-scrollbar { display: none; }
 .lightbox-content img, .lightbox-content video { max-width: 100%; max-height: 100%; object-fit: contain; flex-shrink: 0; }
 /* 2. Changed height to 40%. 3. Removed padding-top, added padding. */
-.lightbox-details { padding: 1rem; overflow-y: auto; height: 40%; display: flex; flex-direction: column; gap: 0.5rem; }
+.lightbox-details { scrollbar-width: none; padding: 1rem; overflow-y: auto; height: 40%; display: flex; flex-direction: column; gap: 0.5rem; }
 @media screen and (min-width: 768px) { 
   /* 2. Changed width to 60% */
   .lightbox-content { width: 60%; height: 100%; } 
   /* 2. Changed width to 40%. 3. Removed padding-left, set padding. */
-  .lightbox-details { width: 40%; height: 100%; padding: 1.5rem; } 
+  .lightbox-details { scrollbar-width: none; width: 40%; height: 100%; padding: 1.5rem; } 
 }
 /* ADDED: Styles for iframe inside lightbox */
 .lightbox-iframe { width: 100%; height: 100%; border: none; flex-shrink: 0; }
@@ -354,8 +356,8 @@ img { max-width: 100%; height: auto; }
 .lightbox-prev { left: -5rem; }
 .lightbox-next { right: -5rem; }
 @media screen and (max-width: 800px) { .lightbox-nav { font-size: 2rem; padding: 0.5rem; } .lightbox-plate { width: 85vw; } }
-.lightbox-prev { left: 0rem; }
-.lightbox-next { right: 0rem; }
+.lightbox-prev { left: -5rem; }
+.lightbox-next { right: -5rem; }
 /* REVIEWS */
 .reviews-container { display: flex; flex-direction: column; gap: 1.5rem; }
 .review-card { padding: 1.5rem; border-left: 3px solid var(--first-color); background: rgba(255, 255, 255, 0.03); transition: all 0.3s ease; cursor: default; }
