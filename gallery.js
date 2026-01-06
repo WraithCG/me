@@ -3,8 +3,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('gallery-container');
     const sectionKey = new URLSearchParams(window.location.search).get('section');
     
+    // Pointers
+    const leftPointer = document.getElementById('scroll-left');
+    const rightPointer = document.getElementById('scroll-right');
+
     // Stop execution if no section is defined in the URL parameters
     if (!sectionKey) return;
+
+    // --- Pointer Visibility Logic ---
+    function updatePointers() {
+        const scrollLeft = container.scrollLeft;
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+
+        // Show/Hide Left Pointer
+        if (scrollLeft > 10) { // Threshold of 10px
+            leftPointer.classList.add('active');
+        } else {
+            leftPointer.classList.remove('active');
+        }
+
+        // Show/Hide Right Pointer
+        // Check if we are close to the end (allow some buffer)
+        if (scrollLeft + clientWidth < scrollWidth - 10) {
+            rightPointer.classList.add('active');
+        } else {
+            rightPointer.classList.remove('active');
+        }
+    }
+
+    // Attach scroll listener
+    container.addEventListener('scroll', updatePointers);
+    // Also update on resize in case window width changes
+    window.addEventListener('resize', updatePointers);
+
+    // --- Pointer Click Logic ---
+    // Scroll a fixed amount when clicked
+    const scrollAmount = 300; 
+
+    if(leftPointer) {
+        leftPointer.addEventListener('click', () => {
+            container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+    }
+
+    if(rightPointer) {
+        rightPointer.addEventListener('click', () => {
+            container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+    }
 
     // 2. Fetch the gallery data
     fetch('gallery.json')

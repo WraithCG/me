@@ -406,6 +406,22 @@ function showLightbox(item) {
     }
 
     lb.classList.add('active');
+
+    // --- NEW: Features List ---
+    // If the item has a 'features' array (common in Asset Store items), display it
+    if(item.features && Array.isArray(item.features) && item.features.length > 0) {
+        const featureList = document.createElement('ul');
+        featureList.className = 'lightbox-features';
+        // Add a small header for context if desired
+        // featureList.innerHTML = '<li><strong>Features:</strong></li>'; 
+        
+        item.features.forEach(f => {
+            const li = document.createElement('li');
+            li.textContent = f;
+            featureList.appendChild(li);
+        });
+        desc.appendChild(featureList); // Append to description area
+    }
 }
 
 function calculateDuration(s, e) {

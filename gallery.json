@@ -169,8 +169,8 @@
             ]
         },
         {
-            "title": "Game Systems Collection for Unreal Engine 5",
-            "previewTitle" : "Game Systems Collection",
+            "title": "Infinite Runner Game Template",
+            "previewTitle" : "Infinite Runner<br>Game Template",
             "caption": "Game System",
             "date": "2025-10-19",
             "media": [
@@ -182,6 +182,13 @@
             ],
             "software": ["Unreal Engine 5"],
             "description": "This collection of game systems for Unreal Engine 5 is designed to help you get started quickly with your game development. It includes a free version of Infinite Runner Game Creator template along with additional systems such as Character Selection System, Character Customization System and Widgets Management System. These systems are modular and can be easily integrated into your existing projects. Whether you're a beginner or an experienced developer, this collection provides a solid foundation for your game development needs.",
+            "features": [
+                "15 Unique Rock Meshes",
+                "4K PBR Textures (Albedo, Normal, Roughness)",
+                "LODs included (LOD0 - LOD3)",
+                "Game-Ready Topology",
+                "Collision Meshes Included"
+            ],
             "links": [
                 { "name": "FREE on FAB", "url": "https://fab.com/s/0bac8dc552db", "hero": true }
             ]

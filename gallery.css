@@ -173,3 +173,47 @@ body {
     font-weight: bold;
     border-color: var(--first-color);
 }
+
+
+/* === NEW: Scroll Pointers === */
+.scroll-pointer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 3rem;
+    background: var(--pointer-bg);
+    color: var(--pointer-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none; /* Initially allow clicks to pass through if hidden */
+    transition: opacity 0.3s ease, background-color 0.2s ease;
+    border-radius: 0.25rem;
+}
+
+/* Show pointer when active class is added by JS */
+.scroll-pointer.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.scroll-pointer:hover {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.scroll-pointer-left {
+    left: 0.5rem;
+}
+
+.scroll-pointer-right {
+    right: 0.5rem;
+}
+
+.scroll-pointer i {
+    font-size: 1.2rem;
+}

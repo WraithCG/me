@@ -10,7 +10,7 @@
             "phone": "0000000000"
         }
     },
-    "profileDescription": "Passionate 3D artist with over 4 years of experience specializing in 3d modeling, product visualization, and motion graphics.",
+    "profileDescription": "Starting my journey in 2022, I have honed my skills in Blender and Unreal Engine 5 to create stunning visuals and immersive experiences. Dedicated to bringing ideas to life through innovative design and meticulous attention to detail.",
     "quotes": [
         { "text": "Arise, awake, and stop not till the goal is reached.", "author": "Swami Vivekananda" },
         { "text": "You have the vision. I have the tools. Let it come to life.", "author": "" },
@@ -37,13 +37,6 @@
             "location": "India",
             "score": "7.58 CGPA",
             "year": "2022 - 20206"
-        },
-        {
-            "title": "Intermediate in Science",
-            "institution": "Sri Ram Education Centre",
-            "location": "India",
-            "score": "9.2 CGPA",
-            "year": "2020 - 2022"
         }
     ],
     "skills": [
@@ -94,12 +87,7 @@
             "name": "Reading",
             "icon": "bx-book",
             "favorites": ["Biography", "Science Fiction", "Technology"]
-        },
-        {
-            "name": "Movies",
-            "icon": "bx-movie-play",
-            "favorites": ["Blade Runner 2049", "Dune", "Inception"]
-        }    
+        }   
     ],
     "svg_socials": [
         {

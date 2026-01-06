@@ -16,7 +16,7 @@
   --backdrop-blur: blur(10px);
   
   /* 1. Added new variable for left column ratio */
-  --left-column-fr: 1fr; /* Was 0.5fr, shifts divider left */
+  --left-column-fr: .54fr; /* Was 0.5fr, shifts divider left */
 
   /* --- TYPOGRAPHY SYSTEM --- */
   /* Base Fonts */
