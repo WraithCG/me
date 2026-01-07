@@ -98,7 +98,7 @@ body {
 }
 
 .gallery-caption {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     color: var(--first-color);
     max-height: 0;
     opacity: 0;

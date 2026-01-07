@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const clientWidth = container.clientWidth;
 
         // Show/Hide Left Pointer
-        if (scrollLeft > 10) { // Threshold of 10px
+        if (scrollLeft > 100) { // Threshold of 10px
             leftPointer.classList.add('active');
         } else {
             leftPointer.classList.remove('active');
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Pointer Click Logic ---
     // Scroll a fixed amount when clicked
-    const scrollAmount = 300; 
+    const scrollAmount = 100; 
 
     if(leftPointer) {
         leftPointer.addEventListener('click', () => {
@@ -64,7 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (items && Array.isArray(items)) {
                 
                 // Sort items by date (Newest to Oldest)
-                items.sort((a, b) => new Date(b.date) - new Date(a.date));
+                if (sectionKey !== 'assets') {
+                    items.sort((a, b) => new Date(b.date) - new Date(a.date));
+                }
 
                 // 4. Generate DOM Elements for each gallery item
                 items.forEach((item, index) => {

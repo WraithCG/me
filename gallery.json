@@ -148,12 +148,12 @@
     ],
     "assets": [
         {
-            "title": "Endless Runner Game Creator Template with Motion Matching",
+            "title": "Endless Runner Game Creator Template with Motion Matching v1.3",
             "previewTitle" : "Endless Runner Game<br>Creator Template v1.3",
-            "caption": "Game Template",
+            "caption": "Game Template | Project",
             "date": "2025-10-19",
             "media": [
-                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/8efb1bb2-f219-43e0-87c3-3ad59755f0d2/b70c8d2b-f121-428f-9e4a-bcfcef591ed2.jpg" },
+                { "type": "image", "src": "https://cdnb.artstation.com/p/assets/images/images/095/151/215/large/wraithcg-edsplash.webp?1767767615" },
                 { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/87350d53-b52e-438c-8bf4-be204be25c7c/45bc9449-6713-4cd1-be0c-0504d321bf58.jpg" },
                 { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/76ac990f-7b89-450c-a485-aedfe28382b8/10d5b46e-11a5-4d78-bee3-9400e63db525.jpg" },
                 { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/6a632401-f9e6-47b8-a091-972f7cd9a0d5/f4acf08d-e6aa-43e0-a65b-4280efd75f83.jpg" },
@@ -168,6 +168,7 @@
                 "Toggle Control Gameplay Features",
                 "Customized Motion Matching Setup",
                 "Multiple Game Modes",
+                "Animation Modification System",
                 "Character Customization System v1.1",
                 "Character Selection System v1.2",
                 "Obstacles, Collectibles & Power-Ups",
@@ -176,13 +177,108 @@
                 "Extensive Documentation"
             ],
             "links": [
-                { "name": "Get on FAB", "url": "https://fab.com/s/17403ac1d4d5", "hero": true }
+                { "name": "Get on FAB", "url": "https://fab.com/s/17403ac1d4d5", "hero": true },
+                { "name": "Documentation", "url": "https://drive.google.com/file/d/1u4F9vj1eBHOEKlqJp27N6u_RyVdb457J/view?usp=sharing", "hero": false },
+                { "name": "Showcase", "url": "https://youtu.be/rBk-THbrwZw", "hero": false }
             ]
         },
         {
-            "title": "Infinite Runner Game Template",
+            "title": "Character Selection System v1.2",
+            "previewTitle" : "Character Selection<br>System v1.2",
+            "caption": "Game System | UI Widget & Controls",
+            "date": "2025-11-05",
+            "media": [
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/a5fd60f7-cad2-41e0-a7e1-b3b1bd35f6dd/e634bff9-1e80-44aa-9f75-b13f25ac951c.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/93af0b6e-df78-4bfc-9221-295c5831a426/fcd1fd18-daea-461b-9309-cd35efefa8e1.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/deee325a-d455-49be-b600-3fcec55256ae/a01fc9d3-0d49-401d-9da1-df8bf3df9961.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/8398aa07-e4e2-4c53-8f2b-ef944cc627c2/05e309f5-6d3f-4648-85e3-7ec74ad60a58.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/f08f20f3-90a1-47a8-a7ab-d9b90be2964c/df91ce9e-be3e-4959-9995-7fadb243fe02.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/f609fbe0-470d-4789-a97d-1f44e2e7bcb0/ca48e72b-2ace-4d9f-8911-ab60f3c62afa.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/822e6596-c166-4f58-a2f2-2164ff38f9ad/742fdc71-4936-4618-8451-0965832ed575.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/5bf6859c-6b5e-4b2a-bff2-58e23c2f2e10/b5cfc06c-cb3a-410c-803a-e3d5a55d6190.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/dd284d60-8ca3-4dbb-bc14-48b43bb14126/fb8f046b-bc26-408d-93c6-0324acf4dab4.jpg" }
+            ],
+            "software": ["Unreal Engine 5"],
+            "description": "This system serves as a completely dynamic, modular, cinematic, and easy-to-customize character selection menu system that you can use in your projects. You can easily change the design of the menu as you like. Create a data asset, add it to an array and there you go :) <br><b>...Get It Now...! </b>",
+            "features": [
+                "Bidirectional Circular Character Selection",
+                "Linear Character Selection",
+                "Character Emote System",
+                "Modular Architecture",
+                "Easy Migration and Integration",
+                "Menu based Camera System",
+                "Extensive Documentation"
+            ],
+            "links": [
+                { "name": "Get on FAB", "url": "https://fab.com/s/086b87b1d5e3", "hero": true },
+                { "name": "Documentation", "url": "https://drive.google.com/file/d/1q4Opm73LC3ALYEDkJZc6hJleUNUmp-X2/view?usp=sharing", "hero": false },
+                { "name": "Showcase", "url": "https://youtu.be/mp7G2nGdkBE", "hero": false }
+            ]
+        },
+        {
+            "title": "Character Customization System v1.1",
+            "previewTitle" : "Character Customization<br>System v1.1",
+            "caption": "Game System | UI Widget & Controls",
+            "date": "2025-11-17",
+            "media": [
+                { "type": "image", "src": "https://cdna.artstation.com/p/assets/images/images/095/151/292/large/wraithcg-dsfgdgsfd.webp?1767768242" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/267e1e8f-e8ad-4ecc-8d0b-dcd4f78b0f98/af251f82-5964-4ec5-95c1-fa7ba501c39f.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/e35bd316-fa25-4351-8849-af90c846071c/52b9b41f-27ea-4f47-b0be-d78dc4df61e3.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/672cecf1-2a20-4e0a-bf48-9c84de5fb890/6377c50e-8847-4d79-a1c3-240e8895ba3d.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/4494e56b-1ff8-49c9-b7d0-1724003c7d82/6f9b8df0-36d8-4d1b-98a5-b7b7813de457.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/fbeac050-c9fd-4dbd-b565-6459a2cdceb4/63591bc4-c79b-4296-ad40-34bcb8c3ecd3.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/c1be45d3-7ea7-4262-be33-1905bdae833f/23fdff0e-af7e-48bb-a246-aa1ae8e01b11.jpg" }
+            ],
+            "software": ["Unreal Engine 5"],
+            "description": "This system serves as a completely dynamic, modular and easy-to-customize character customization menu system that you can use in your projects. You can change the design of the menu as you like. Customization is as easy as adding elements to arrays :)<br><b>...Grab Now...!  </b>",
+            "features": [
+                "Modular Architecture",
+                "Character Emote System",
+                "Easy Migration and Integration",
+                "Menu based Camera System",
+                "Extensive Documentation"
+            ],
+            "links": [
+                { "name": "Get on FAB", "url": "https://fab.com/s/4783e6ad37d8", "hero": true },
+                { "name": "Documentation", "url": "https://drive.google.com/file/d/128AGGNRpUpO3LGyXXZpckgg2UBm7COm6/view?usp=sharing", "hero": false },
+                { "name": "Showcase", "url": "https://youtu.be/q2LBmpyXM-w", "hero": false }
+
+            ]
+        },
+        {
+            "title": "Widgets Management System v1.1",
+            "previewTitle" : "Widgets Management<br>System v1.1",
+            "caption": "Game System | UI Widget & Controls",
+            "date": "2025-12-03",
+            "media": [
+                { "type": "image", "src": "https://cdnb.artstation.com/p/assets/images/images/095/162/801/large/wraithcg-17.jpg?1767798987" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/d4f2e597-f4fc-47e7-972b-4bcac1731266/0bb13a8b-6f2d-4132-ab7f-4753d5127161.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/703a2f68-34d7-4368-a25e-815206ea14b4/9e219525-f55c-498e-bf3a-835631415928.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/b21d8dd0-4d96-42af-af2b-6748803c4c85/bb4f4d7e-99bb-4660-a5c8-5c613e3a6017.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/22249c9f-4e2f-4a08-93a4-049dc0c9a0a6/c88ac258-efb4-4b1e-a164-11d6536e0436.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/621fbb05-682b-4906-a2b3-1ad2b831dda2/5cb238b1-47bf-4bd5-b544-c68ed9a1dc18.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/9846eacc-04b8-4d72-a34d-d24a6978c7c2/82ad9761-38d4-4810-8b3a-286d3f722f48.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/4446a881-c0ba-470c-968c-20173341d09d/76f3a7cb-c2d4-4baf-94bc-167c54399d73.jpg" }
+            ],
+            "software": ["Unreal Engine 5"],
+            "description": "Manual process of adding widgets to the viewport and removing them can be tiring. Now you need not to worry about manually creating any widget, caching its reference for future uses and removing it from parent when new widgets are added to viewport. This widgets management system streamlines this process. :)<br><b>...Do not miss...!  </b>",
+            "features": [
+                "Modular Architecture",
+                "Character Emote System",
+                "Easy Migration and Integration",
+                "Menu based Camera System",
+                "Extensive Documentation"
+            ],
+            "links": [
+                { "name": "FREE on FAB", "url": "https://fab.com/s/240d1d31e08a", "hero": true },
+                { "name": "See Chapter 12", "url": "https://drive.google.com/file/d/1u4F9vj1eBHOEKlqJp27N6u_RyVdb457J/view?usp=sharing", "hero": false },
+                { "name": "Showcase", "url": "https://youtu.be/r9LVdtZ5mpM", "hero": false }
+            ]
+        },
+        {
+            "title": "Infinite Runner Game Template v1.1",
             "previewTitle" : "Infinite Runner<br>Game Template",
-            "caption": "Game System",
+            "caption": "Game Template | Project",
             "date": "2025-10-19",
             "media": [
                 { "type": "image", "src": "https://cdnb.artstation.com/p/assets/images/images/094/734/229/large/wraithcg-screenshot-2025-12-03dsfdsfd203700.webp?1766259292" },
@@ -194,14 +290,48 @@
             "software": ["Unreal Engine 5"],
             "description": "This is a free version of Infinite Runner Game Creator template. Whether you're a beginner or an experienced developer, this collection provides a solid foundation for your game development needs.<br><b>...Add to your library now...!</b>",
             "features": [
-                "Character Customization System",
-                "Character Selection System",
+                "Character Customization System v1.0",
+                "Character Selection System v1.1",
                 "Obstacles Spawner System",
-                "Widgets & Management System",
+                "Widgets & Management System v1.0",
                 "Extensive Documentation"
             ],
             "links": [
-                { "name": "FREE on FAB", "url": "https://fab.com/s/0bac8dc552db", "hero": true }
+                { "name": "FREE on FAB", "url": "https://fab.com/s/0bac8dc552db", "hero": true },
+                { "name": "Documentation", "url": "https://drive.google.com/file/d/1mfkJCa2Big5jLXjlcP26deMFGUqPt9NM/view?usp=sharing", "hero": false }
+            ]
+        },
+        {
+            "title": "Action-Adventure Game Project v1.0",
+            "previewTitle" : "Action Adventure<br>Game Project v1.0",
+            "caption": "Game Template | Project",
+            "date": "2026-01-02",
+            "media": [
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/267e1e8f-e8ad-4ecc-8d0b-dcd4f78b0f98/af251f82-5964-4ec5-95c1-fa7ba501c39f.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/91531a0a-c816-476a-ba54-8c24986ff2e6/a884b9e1-8214-470a-857e-6e893957ee8c.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/15bacedb-258a-4d80-ae49-a638a3550a0e/00db0268-c611-43e8-bd75-4130718b5830.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/e35bd316-fa25-4351-8849-af90c846071c/52b9b41f-27ea-4f47-b0be-d78dc4df61e3.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/270bb411-58f0-4b5b-b501-401188e4a7da/0d07c52c-c0e0-489f-a80b-357c05f70289.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/2ef9acb1-db44-435b-a104-bc49cced73d4/535cc8d8-62b2-44a4-8414-302dc42335ac.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/ee01881f-bd1f-4fd5-b228-c379e4e55654/e495f86a-f424-4d3a-8dc4-1c3eb5a6d20e.jpg" },
+                { "type": "image", "src": "https://media.fab.com/image_previews/gallery_images/7e356ef3-586a-4aea-a95a-7974055da31a/20ba9cf8-5820-4b94-a3ea-aec9fd5c9a53.jpg" }
+            ],
+            "software": ["Unreal Engine 5"],
+            "description": "This project serves as a starter base project for building your dream action-adventure game. It is interface-driven and everything is handled with the help of data assets. If you're searching for a game system for your next project then this is exactly what you need. On the plus side, almost everything is commented and documented so you can easily break it down. <br><b>...Start your adventure now...! </b>",
+            "features": [
+                "Play Level Sequences in Menu Screens",
+                "Character Emote System",
+                "Animation Modification System",
+                "Character Customization System v1.1",
+                "Character Selection System v1.2",
+                "Widgets & Management System v1.1",
+                "Action Camera System",
+                "Extensive Documentation"
+            ],
+            "links": [
+                { "name": "Get on FAB", "url": "https://fab.com/s/00a7f3a96843", "hero": true },
+                { "name": "Documentation", "url": "https://drive.google.com/file/d/14QeSZpAE1AWKZaUpVOUQfRDmebfm40qd/view?usp=sharing", "hero": false },
+                { "name": "Showcase", "url": "https://youtu.be/r9LVdtZ5mpM", "hero": false }
             ]
         }
     ],
