@@ -86,6 +86,66 @@
             "links": [ { "name": "Artstation", "url": "https://www.artstation.com/artwork/1x5o62", "hero": true} ]
         }
     ],
+    "motion_graphics": [
+        {
+            "title": "Tech Corp Identity",
+            "caption": "Logo Reveal",
+            "date": "2023-12-05",
+            "client": "Tech Corp",
+            "media": [
+                { "type": "video", "src": "assets/motion/logo_reveal.mp4" },
+                { "type": "image", "src": "assets/motion/styleframe_01.jpg" },
+                { "type": "image", "src": "assets/motion/styleframe_02.jpg" }
+            ],
+            "software": ["After Effects", "Cinema 4D"],
+            "description": "Final animation and styleframes presented to the client."
+        }
+    ],
+    "product_viz": [
+        {
+            "title": "Luxury Watch",
+            "caption": "Commercial Spot",
+            "date": "2024-02-01",
+            "client": "Chronos",
+            "media": [
+                { "type": "image", "src": "assets/product_viz/watch_hero.jpg" },
+                { "type": "image", "src": "assets/product_viz/watch_detail.jpg" },
+                { "type": "video", "src": "assets/product_viz/watch_turntable.mp4" }
+            ],
+            "software": ["Maya", "V-Ray"],
+            "description": "Hero shots and 360 turntable.",
+            "links": [ { "name": "Artstation", "url": "https://www.artstation.com/artwork/1x5o62", "hero": true} ]
+        }
+    ],
+    "character_art": [
+        {
+            "title": "Orc Warrior",
+            "caption": "Game Character",
+            "date": "2023-05-12",
+            "media": [
+                { "type": "image", "src": "assets/characters/warrior_final.jpg" },
+                { "type": "video", "src": "assets/characters/warrior_turntable.mp4" },
+                { "type": "image", "src": "assets/characters/warrior_wireframe.jpg" }
+            ],
+            "software": ["ZBrush", "Substance Painter"],
+            "description": "Final render, turntable, and topology check."
+
+        }
+    ],
+    "logo_designs": [
+        {
+            "title": "Eco Brand",
+            "caption": "Identity Package",
+            "date": "2023-07-10",
+            "media": [
+                { "type": "image", "src": "assets/logos/eco_main.jpg" },
+                { "type": "image", "src": "assets/logos/eco_mockup_01.jpg" },
+                { "type": "image", "src": "assets/logos/eco_mockup_02.jpg" }
+            ],
+            "software": ["Illustrator"],
+            "description": "Logo usage across various mockups."
+        }
+    ],
     "assets": [
         {
             "title": "Endless Runner Game Creator Template with Motion Matching v1.3",
@@ -273,6 +333,15 @@
                 { "name": "Documentation", "url": "https://drive.google.com/file/d/14QeSZpAE1AWKZaUpVOUQfRDmebfm40qd/view?usp=sharing", "hero": false },
                 { "name": "Showcase", "url": "https://youtu.be/r9LVdtZ5mpM", "hero": false }
             ]
+        }
+    ],
+    "reviews": [
+        {
+            "name": "Mandy Bhute",
+            "company": "Human Resources Department, MBS Studios",
+            "avatar": "https://tse2.mm.bing.net/th/id/OIP.qOSjSxoUNci9aPL9spX_eQHaHa?pid=Api&P=0&h=220",
+            "rating": 5,
+            "text": "During his internship as a 3D Blender Artist, he performed well, and his dedication to his responsibilities was commendable. As part of his internship, he also demonstrated a strong work ethic and high productivity. We wish him the best in his future career and thank him for his contributions."
         }
     ]
 }

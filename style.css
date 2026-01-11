@@ -26,11 +26,11 @@
 
   /* Granular Font Assignments - CHANGE THESE TO MANAGE FONTS INDIVIDUALLY */
   --heading-font: var(--body-font);       /* For h1, h2, h3, section titles */
-  --date-font: var(--system-font);        /* For dates, timelines, durations */
+  --date-font: var(--body-font);        /* For dates, timelines, durations */
   --content-font: var(--other-font);     /* For general paragraphs, descriptions */
   --list-font: var(--other-font);        /* For li elements, skills, tasks */
   --link-font: var(--body-font);          /* For nav links, buttons, external links */
-  --desc-font: var(--system-font);        /* Specific for profile descriptions if different */
+  --desc-font: var(--other-font);        /* Specific for profile descriptions if different */
   --ui-font: var(--body-font);            /* For UI elements like time card text */
 
   /* Font Sizes */
@@ -526,7 +526,7 @@ img { max-width: 100%; height: auto; }
   margin-top: 0px;
   margin-left: 15px;
   font-weight: 600;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family:var(--ui-font);
   color: var(--title-color); /* Use title color for emphasis */
   line-height: 1.1;
 }
@@ -542,7 +542,7 @@ img { max-width: 100%; height: auto; }
   margin-top: 0px;
   margin-left: 15px;
   font-weight: 500;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: var(--content-font);
   color: var(--text-color-light);
 }
 
