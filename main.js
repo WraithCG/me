@@ -1,570 +1,547 @@
-let currentLightboxList = [];
-let currentLightboxIndex = 0;
+const AppState = {
+    currentTheme: 'royal', // Base fallback
+    currentSection: 'home',
+    isMenuOpen: false,
+    isLoaded: false,
+    projectIndex: 0,
+    projectMediaIndex: 0,
+    serviceIndex: 0,
+    serviceMediaIndex: 0
+};
 
-// === INITIALIZATION ===
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Set the visual theme immediately to avoid flickering
-    applyRandomTheme();
-
-    // 2. Fetch Portfolio Data (Profile, Resume, etc.)
-    fetch('data.json')
-        .then(r => r.json())
-        .then(d => {
-            populateData(d); // Fill HTML with JSON data
-            initializeInteractivity(d); // Setup buttons, drawers, and scroll logic
-        })
-        .catch(e => console.error("Error loading data.json:", e));
-
-    // 3. Fetch Reviews specifically (separated to allow independent updates)
-    fetch('gallery.json')
-        .then(r => r.json())
-        .then(d => {
-            if (d.reviews) populateReviews(d.reviews);
-        })
-        .catch(e => console.error("Error loading reviews:", e));
-
-    // 4. Utility Setups
-    setupAutoResizeTextarea();
-
-    // 5. Visual Effects
-    initStarfield(); // Canvas background; reads CSS variables for color
-    initializeTimeCard(); // Real-time clock widget
+    renderDynamicContent();
+    initializeApp();
 });
 
-// === THEME ENGINE ===
-// Randomly selects a theme class and applies it to the body
-function applyRandomTheme() {
-    const themes = ['theme-default', 'theme-cosmic', 'theme-cyberpunk', 'theme-royal', 'theme-metal'];
-    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-
-    // Clean up old classes before adding new ones
-    document.body.classList.remove('theme-cosmic', 'theme-cyberpunk', 'theme-royal', 'theme-metal', 'dark-theme');
-
-    if (randomTheme !== 'theme-default') {
-        document.body.classList.add(randomTheme, 'dark-theme');
-    }
+function initializeApp() {
+    loadPreferences();
+    initTheme();
+    initNavigation();
+    initScrollEffects();
+    initFormHandlers();
+    initMobileMenu();
+    generateParticles();
+    initLightboxes();
+    initLoaderAnimation();
+    AppState.isLoaded = true;
 }
 
-// === DATA POPULATION ===
-// Injects JSON data into specific HTML IDs
-function populateData(data) {
-    document.getElementById('nav-logo').textContent = data.navLogo || ' ';
-
-    if (data.home.profileImage) {
-        document.getElementById('profile-img').src = data.home.profileImage;
-    }
-
-    document.getElementById('home-title').innerHTML = data.home.name;
-
-    // Generate Profession Tags
-    if (data.home.professions) {
-        document.getElementById('home-professions').innerHTML = data.home.professions
-            .map(p => `<span class="profession-item">${p}</span>`).join('');
-    }
-
-    // Contact Info
-    // document.getElementById('contact-info').innerHTML = `
-    //     <span class="home-information"><i class="bx bx-map home-icon"></i> ${data.home.contact.address}</span>
-    //     <span class="home-information"><i class="bx bx-envelope home-icon"></i> ${data.home.contact.email}</span>`;
-
-    document.getElementById('contact-info').innerHTML = `
-        <span class="home-information"><i class="bx bx-envelope home-icon"></i> ${data.home.contact.email}</span>`;
-
-
-    document.getElementById('profile-description').textContent = data.profileDescription;
-
-    // Timeline Generation: Education & Experience
-    if (data.education) {
-        document.getElementById('education-container').innerHTML = data.education.map((e, i) => `
-            <div class="education-content">
-                <div class="education-time">
-                    <span class="education-rounder"></span>
-                    ${i < data.education.length - 1 ? '<span class="education-line"></span>' : ''}
-                </div>
-                <div class="education-data bd-grid">
-                    <h3 class="education-title">${e.title}</h3>
-                    <span class="education-studies">${e.institution}</span>
-                    <span class="education-year">${e.year}</span>
-                </div>
-            </div>`).join('');
-    }
-
-    // Skills Columns
-    if (data.skills) {
-        document.getElementById('skills-col1').innerHTML = data.skills[0].map(s => `<li class="skills-name"><span class="skills-circle"></span> ${s.name}</li>`).join('');
-        document.getElementById('skills-col2').innerHTML = data.skills[1].map(s => `<li class="skills-name"><span class="skills-circle"></span> ${s.name}</li>`).join('');
-    }
-
-    // Software List with SVG icons
-    if (data.software) {
-        document.getElementById('software-container').innerHTML = data.software.map(sw => `
-            <div class="software-content">
-                <div class="software-info">${sw.svg || ''}<span class="software-name">${sw.name}</span></div>
-                <span class="software-experience">${sw.experience}</span>
-            </div>`).join('');
-    }
-
-    // Experience Timeline
-    // if (data.experience) {
-    //     document.getElementById('experience-container').innerHTML = data.experience.map((e,i) => `
-    //         <div class="experience-content">
-    //             <div class="experience-time">
-    //                 <span class="experience-rounder"></span>
-    //                 ${i < data.experience.length-1 ? '<span class="experience-line"></span>' : ''}
-    //             </div>
-    //             <div class="experience-data bd-grid">
-    //                 <div class="experience-title-group">
-    //                     <h3 class="experience-title">${e.title}</h3>
-    //                     <span class="experience-duration">${calculateDuration(e.startDate, e.endDate)}</span>
-    //                 </div>
-    //                 <span class="experience-company">${e.company}</span>
-    //                 ${e.tasks ? `<ul class="experience-tasks">${e.tasks.map(t => `<li>${t}</li>`).join('')}</ul>` : ''}
-    //             </div>
-    //         </div>`).join('');
-    // }
-
-    // Interests
-    if (data.interests) {
-        document.getElementById('interests-container').innerHTML = data.interests.map(i => `
-            <div class="interests-content">
-                <i class="bx ${i.icon} interests-icon"></i>
-                <span class="interests-name">${i.name}</span>
-                ${i.favorites ? `<ul class="favorites-list">${i.favorites.map(f => `<li>${f}</li>`).join('')}</ul>` : ''}
-            </div>`).join('');
-    }
-
-    // Floating Social Buttons
-    const socialContainer = document.getElementById('floating-socials-container');
-    if (socialContainer && data.svg_socials) {
-        socialContainer.innerHTML = '';
-        data.svg_socials.forEach(social => {
-            socialContainer.innerHTML += `
-                <div class="social-button-wrapper">
-                    <a href="${social.url}" target="_blank" class="button" title="${social.name}">
-                        ${social.svg}
-                    </a>
-                    <span class="social-handle-pop">${social.handle}</span>
-                </div>`;
-        });
-    }
-
-    if (data.quotes) displayRandomQuote(data.quotes);
+// --- Loader Animation ---
+function initLoaderAnimation() {
+    const loader = document.getElementById('loader');
+    const loaderPercent = document.getElementById('loaderPercent');
+    if (!loader || !loaderPercent) return;
+    
+    let progress = 0;
+    const progressInterval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(progressInterval);
+            setTimeout(() => {
+                if (typeof anime !== 'undefined') {
+                    anime({
+                        targets: loader,
+                        opacity: [1, 0],
+                        duration: 500,
+                        easing: 'easeInOutQuad',
+                        complete: () => loader.classList.add('hidden')
+                    });
+                } else {
+                    loader.classList.add('hidden');
+                }
+            }, 300);
+        }
+        loaderPercent.textContent = Math.floor(progress) + '%';
+    }, 100);
 }
 
-function populateReviews(reviews) {
-    document.getElementById('reviews-container').innerHTML = reviews.map(r => `
-        <div class="review-card glass-panel">
-            <div class="review-header">
-                <div class="reviewer-info">
-                    <img src="${r.avatar}" class="reviewer-avatar">
-                    <div>
-                        <div class="reviewer-name">${r.name}</div>
-                        <div class="reviewer-company">${r.company}</div>
-                    </div>
-                </div>
-                <div class="review-rating">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
-            </div>
-            <p class="review-text">"${r.text}"</p>
-        </div>`).join('');
-}
-
-function displayRandomQuote(quotes) {
-    const q = quotes[Math.floor(Math.random() * quotes.length)];
-    document.getElementById('quote-text').textContent = `“${q.text}”`;
-    document.getElementById('quote-author').textContent = q.author;
-}
-
-// === INTERACTIVITY & EVENT LISTENERS ===
-function initializeInteractivity(portfolioData) {
-    // Navigation Toggle (Mobile)
-    document.getElementById('nav-toggle').addEventListener('click', () => document.getElementById('nav-menu').classList.toggle('show-menu'));
-    document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => document.getElementById('nav-menu').classList.remove('show-menu')));
-
-    // Scroll Active Link Highlighting
-    const sections = document.querySelectorAll('section[id], .resume-right[id]');
-    window.addEventListener('scroll', () => {
-        sections.forEach(c => {
-            const top = c.offsetTop - 50, height = c.offsetHeight, id = c.getAttribute('id');
-            const link = document.querySelector('.nav-menu a[href*=' + id + ']');
-            if (link) link.classList.toggle('active-link', window.scrollY > top && window.scrollY <= top + height);
-        });
-        document.getElementById('scroll-top').classList.toggle('show-scroll', window.scrollY >= 200);
-    });
-
-    // Drawer (Accordion) Logic
-    const drawers = document.querySelectorAll('.drawer');
-    drawers.forEach(d => {
-        let t;
-        const title = d.querySelector('.drawer-title');
-
-        // Hover to open
-        title.addEventListener('mouseenter', () => t = setTimeout(() => {
-            drawers.forEach(dr => !dr.classList.contains('locked-open') && dr.classList.remove('open'));
-            d.classList.add('open');
-            // if(d.closest('.resume-right')) setTimeout(updateQuoteVisibility, 50); 
-        }, 700));
-
-        title.addEventListener('mouseleave', () => clearTimeout(t));
-
-        // Click to Lock/Unlock
-        title.addEventListener('click', () => {
-            clearTimeout(t);
-            if (!d.classList.contains('open')) triggerLightning(title); // Visual FX on open
-
-            const locked = d.classList.contains('locked-open');
-            drawers.forEach(dr => dr.classList.remove('locked-open', 'open'));
-
-            if (!locked) {
-                d.classList.add('locked-open', 'open');
-                setTimeout(() => d.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+// --- Navigation & Scroll Spy ---
+function initNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                window.scrollTo({ top: targetSection.offsetTop - 80, behavior: 'smooth' });
+                if (AppState.isMenuOpen) toggleMobileMenu();
             }
-            // if(d.closest('.resume-right')) setTimeout(updateQuoteVisibility, 50);
-        });
-
-        d.addEventListener('mouseleave', () => {
-            if (!d.classList.contains('locked-open')) d.classList.remove('open');
-            if (d.closest('.resume-right')) setTimeout(updateQuoteVisibility, 400);
         });
     });
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', updateHeaderOnScroll);
+}
 
-    // Toggle Quote visibility based on drawer state
-    function updateQuoteVisibility() {
-        const qc = document.getElementById('thought-of-the-day'); if (!qc) return;
-        qc.classList.toggle('hidden', document.querySelector('.resume-right .drawer.open'));
-        if (!qc.classList.contains('hidden') && portfolioData.quotes) displayRandomQuote(portfolioData.quotes);
+function handleScroll() {
+    const sections = document.querySelectorAll('section[id]');
+    const scrollPosition = window.scrollY + (window.innerHeight / 3);
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            AppState.currentSection = sectionId;
+            updateActiveNavLink(sectionId);
+        }
+    });
+}
+
+function updateActiveNavLink(sectionId) {
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === sectionId) link.classList.add('active');
+    });
+}
+
+function updateHeaderOnScroll() {
+    const header = document.querySelector('.main-header');
+    if (header) {
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
     }
-
-    // Hover effect for Interests
-    document.querySelectorAll('.interests-content').forEach(el => {
-        let t;
-        el.addEventListener('mouseenter', () => t = setTimeout(() => el.classList.add('show-favorites'), 500));
-        el.addEventListener('mouseleave', () => { clearTimeout(t); el.classList.remove('show-favorites') });
-    });
-
-    // Lightning FX triggers
-    const profileContainer = document.getElementById('profile-container');
-    profileContainer.addEventListener('click', (e) => {
-        e.stopPropagation();
-        triggerLightning(profileContainer);
-        // console.log("Profile lightning triggered");
-    });
-    document.addEventListener('click', () => document.querySelectorAll('.resume-bottom-line, .page-bottom-line, .page-top-line').forEach(l => triggerLightning(l)));
-
-    // Contact Form Logic
-    const contactForm = document.getElementById('contact-form'), btn = document.getElementById('contact-button'), wrap = document.getElementById('contact-button-wrapper');
-    const inputs = contactForm.querySelectorAll('input, textarea');
-
-    // Live Validation Visuals
-    const checkValidity = () => {
-        const valid = [...inputs].every(i => i.checkValidity());
-        btn.disabled = !valid;
-        if (valid && !wrap.querySelector('.lightning-overlay')) {
-            const l = document.createElement('div'); l.className = 'lightning-overlay';
-            l.innerHTML = '<div class="lightning-border"></div><div class="lightning-glow-1"></div><div class="lightning-glow-2"></div>';
-            wrap.appendChild(l); wrap.classList.add('valid-glow');
-        }
-        else if (!valid) {
-            wrap.classList.remove('valid-glow');
-            const l = wrap.querySelector('.lightning-overlay'); if (l) l.remove();
-        }
-    };
-    inputs.forEach(i => i.addEventListener('input', checkValidity));
-
-    // Form Submission
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const key = "46fc9be7-5f6d-42d1-a21a-844296f6d2ba";
-        if (key.includes("YOUR_")) { alert("Update Access Key in main.js"); return; }
-
-        btn.disabled = true; btn.textContent = "Sending...";
-        const fd = new FormData(contactForm); fd.append("access_key", key);
-
-        fetch("https://api.web3forms.com/submit", { method: "POST", body: fd }).then(async r => {
-            if (r.status == 200) {
-                wrap.classList.remove('valid-glow'); wrap.querySelector('.lightning-overlay')?.remove();
-                btn.textContent = "Thanks!"; contactForm.reset();
-                setTimeout(() => { btn.textContent = "Send message →"; checkValidity(); }, 4000);
-            }
-            else { btn.textContent = "Error!"; setTimeout(() => { btn.textContent = "Send message →"; btn.disabled = false; }, 3000); }
-        }).catch(() => { btn.textContent = "Error!"; setTimeout(() => { btn.textContent = "Send message →"; btn.disabled = false; }, 3000); });
-    });
-
-    // Lightbox Logic (Inter-iframe communication)
-    const lightbox = document.getElementById('lightbox');
-    window.addEventListener('message', (e) => {
-        if (e.data?.type === 'openLightbox') {
-            currentLightboxList = e.data.list || [];
-            currentLightboxIndex = e.data.index || 0;
-            updateLightbox();
-        }
-    });
-
-    document.querySelector('.lightbox-prev').addEventListener('click', (e) => { e.stopPropagation(); navLightbox(-1) });
-    document.querySelector('.lightbox-next').addEventListener('click', (e) => { e.stopPropagation(); navLightbox(1) });
-    document.addEventListener('keydown', (e) => {
-        if (lightbox.classList.contains('active')) {
-            if (e.key === 'ArrowLeft') navLightbox(-1);
-            else if (e.key === 'ArrowRight') navLightbox(1);
-            else if (e.key === 'Escape') closeLightbox();
-        }
-    });
-    document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-
-    document.getElementById('home-data').addEventListener('click', () => {
-        console.log("Profile image clicked");
-        if (screen.width <= 968) {
-            const contact = document.getElementById('contact');
-            if (contact.style.display === "none" || getComputedStyle(contact).display === "none") {
-                contact.style.display = "flex";
-                contact.right = "50%";
-            } else {
-                contact.style.display = "none";
-                console.log("Contact section hidden");
-            }
-        }
-    });
 }
 
-// === HELPER FUNCTIONS ===
-
-// Creates a visual lightning strike effect on an element
-function triggerLightning(el) {
-    if (!el) return;
-    const old = el.querySelector('.lightning-effect'); if (old) old.remove();
-    const l = document.createElement('div');
-    l.className = 'lightning-effect';
-    l.innerHTML = '<div class="lightning-border"></div><div class="lightning-glow-1"></div><div class="lightning-glow-2"></div>';
-    el.appendChild(l);
-    setTimeout(() => l.remove(), 1200);
-}
-
-// Lightbox Navigation
-function navLightbox(dir) {
-    if (!currentLightboxList.length) return;
-    currentLightboxIndex = (currentLightboxIndex + dir + currentLightboxList.length) % currentLightboxList.length;
-    updateLightbox();
-}
-
-function updateLightbox() { showLightbox(currentLightboxList[currentLightboxIndex]); }
-
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.querySelectorAll('#lightbox video').forEach(v => v.pause());
-}
-
-// Populate Lightbox UI
-function showLightbox(item) {
-    if (!item) return;
-    const lb = document.getElementById('lightbox');
-    const mc = document.getElementById('lightbox-media-container');
-    mc.innerHTML = '';
-
-    // Handle 'media' array (multiple items) or legacy single 'src'
-    const addMediaToDom = (m) => {
-        const isVideo = m.type === 'video' || (m.src && m.src.match(/\.(mp4|webm|ogg)$/i));
-        const el = document.createElement(isVideo ? 'video' : 'img');
-        el.src = m.src;
-        if (isVideo) {
-            el.controls = true;
-            el.loop = true;
-        } else {
-            el.alt = item.caption || '';
-        }
-        mc.appendChild(el);
-    };
-
-    if (item.media && item.media.length > 0) {
-        item.media.forEach(addMediaToDom);
-    } else if (item.src) {
-        addMediaToDom(item);
-    }
-
-    document.getElementById('lightbox-title').textContent = item.title || '';
-    document.getElementById('lightbox-caption').textContent = item.caption || '';
-
-    // External Links
-    const lc = document.getElementById('lightbox-links'); lc.innerHTML = '';
-    if (item.links) {
-        item.links.forEach(l => {
-            lc.innerHTML += `<a href="${l.url}" target="_blank" class="${l.hero ? 'hero-link' : ''}">${l.hero ? "<i class='bx bx-link-external'></i> " : ""}${l.name}</a>`;
+// --- Lightbox Core Functionality ---
+function initLightboxes() {
+    // Background click closing
+    document.querySelectorAll('.lightbox').forEach(lb => {
+        lb.addEventListener('click', (e) => {
+            if (e.target.classList.contains('lightbox')) closeLightboxes();
         });
-    }
+    });
 
-    // Meta Tags
-    const meta = document.getElementById('lightbox-meta'); meta.innerHTML = '';
-    if (item.date) meta.innerHTML += `<div class="meta-item"><i class='bx bx-calendar'></i> ${item.date}</div>`;
-    if (item.client) meta.innerHTML += `<div class="meta-item"><i class='bx bx-briefcase'></i> ${item.client}</div>`;
-    if (item.software) meta.innerHTML += `<div class="meta-tags-group"><span class="meta-label">Software:</span> ${item.software.map(s => `<span class="meta-tag software">${s}</span>`).join('')}</div>`;
+    // Project Navigation Bindings
+    document.getElementById('projNavPrev')?.addEventListener('click', () => navigateProject(-1));
+    document.getElementById('projNavNext')?.addEventListener('click', () => navigateProject(1));
+    document.getElementById('projMediaPrev')?.addEventListener('click', () => changeProjectMedia(-1));
+    document.getElementById('projMediaNext')?.addEventListener('click', () => changeProjectMedia(1));
 
-    // Description (handles array of paragraphs or single string)
-    const desc = document.getElementById('lightbox-description'); desc.innerHTML = '';
-    if (Array.isArray(item.description)) {
-        item.description.forEach(p => desc.innerHTML += `<p>${p}</p>`);
-    } else if (item.description) {
-        desc.innerHTML = `<p>${item.description}</p>`;
+    // Service Navigation Bindings
+    document.getElementById('srvNavPrev')?.addEventListener('click', () => navigateService(-1));
+    document.getElementById('srvNavNext')?.addEventListener('click', () => navigateService(1));
+    document.getElementById('srvMediaPrev')?.addEventListener('click', () => changeServiceMedia(-1));
+    document.getElementById('srvMediaNext')?.addEventListener('click', () => changeServiceMedia(1));
+}
+
+function closeLightboxes() {
+    document.querySelectorAll('.lightbox').forEach(lb => lb.classList.remove('active'));
+    document.body.style.overflow = ''; 
+    // Stop videos
+    document.getElementById('projectMedia').innerHTML = '';
+    document.getElementById('srvMedia').innerHTML = '';
+}
+
+// Coordinate-based Image Zoom logic
+function handleZoom(e) {
+    const img = e.target;
+    if (img.classList.contains('zoomed')) {
+        img.classList.remove('zoomed');
+        img.style.transform = 'scale(1)';
+    } else {
+        const rect = img.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const originX = (x / rect.width) * 100;
+        const originY = (y / rect.height) * 100;
+        
+        img.style.transformOrigin = `${originX}% ${originY}%`;
+        img.classList.add('zoomed');
+        img.style.transform = 'scale(2.5)';
     }
+}
+
+// --- Project Lightbox ---
+function openProject(index) {
+    if (typeof portfolioData === 'undefined' || !portfolioData.projects[index]) return;
+    
+    AppState.projectIndex = index;
+    AppState.projectMediaIndex = 0; 
+    
+    const project = portfolioData.projects[index];
+    const lb = document.getElementById('projectLightbox');
+    
+    document.getElementById('proj-title').textContent = project.title;
+    document.getElementById('proj-desc').innerHTML = `<p>${project.desc}</p>`;
+    document.getElementById('proj-date').textContent = project.date || 'N/A';
+    document.getElementById('proj-role').textContent = project.role || 'Freelancer';
+    
+    document.getElementById('proj-tags').innerHTML = project.tags ? project.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : '';
+
+    const feats = document.getElementById('project-features');
+    if (project.features && project.features.length > 0) {
+        feats.innerHTML = `<h4>Project Scope</h4><ul>${project.features.map(f => `<li><i class="fas fa-check"></i> <span>${f}</span></li>`).join('')}</ul>`;
+    } else {
+        feats.innerHTML = '';
+    }
+    
+    renderProjectMedia();
+
+    const actions = document.getElementById('proj-actions');
+    let linksHtml = '';
+    if (project.links) {
+        if (project.links.github) linksHtml += `<a href="${project.links.github}" target="_blank" class="btn btn-secondary"><i class="fas fa-code-branch"></i> Source</a>`;
+        if (project.links.live) linksHtml += `<a href="${project.links.live}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live View</a>`;
+    }
+    actions.innerHTML = linksHtml;
 
     lb.classList.add('active');
+    document.body.style.overflow = 'hidden'; 
+}
 
-    // --- NEW: Features List ---
-    // If the item has a 'features' array (common in Asset Store items), display it
-    if (item.features && Array.isArray(item.features) && item.features.length > 0) {
-        const featureList = document.createElement('ul');
-        featureList.className = 'lightbox-features';
-        // Add a small header for context if desired
-        // featureList.innerHTML = '<li><strong>Features:</strong></li>'; 
+function renderProjectMedia() {
+    const project = portfolioData.projects[AppState.projectIndex];
+    const mediaContainer = document.getElementById('projectMedia');
+    const prev = document.getElementById('projMediaPrev');
+    const next = document.getElementById('projMediaNext');
+    const dots = document.getElementById('projMediaDots');
+    
+    if (!project.media || project.media.length === 0) {
+        if (project.thumbnail) {
+            mediaContainer.innerHTML = `<img src="${project.thumbnail}" alt="${project.title}" class="zoomable-image" onclick="handleZoom(event)">`;
+        } else {
+            mediaContainer.innerHTML = `<i class="fas ${project.icon || 'fa-project-diagram'} fa-10x" style="opacity:0.2; color: var(--primary);"></i>`;
+        }
+        prev.style.display = 'none'; next.style.display = 'none'; dots.innerHTML = ''; return;
+    }
+    
+    const curr = project.media[AppState.projectMediaIndex];
+    if (curr.type === 'video') {
+        mediaContainer.innerHTML = `<iframe src="${curr.url}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+    } else {
+        mediaContainer.innerHTML = `<img src="${curr.url}" alt="${project.title}" class="zoomable-image" onclick="handleZoom(event)">`;
+    }
+    
+    if (project.media.length > 1) {
+        prev.style.display = 'flex'; next.style.display = 'flex';
+        dots.innerHTML = project.media.map((_, i) => `<div class="media-dot ${i === AppState.projectMediaIndex ? 'active' : ''}" onclick="setProjectMedia(${i})"></div>`).join('');
+    } else {
+        prev.style.display = 'none'; next.style.display = 'none'; dots.innerHTML = '';
+    }
+}
 
-        item.features.forEach(f => {
-            const li = document.createElement('li');
-            li.textContent = f;
-            featureList.appendChild(li);
+function changeProjectMedia(dir) {
+    const project = portfolioData.projects[AppState.projectIndex];
+    if (!project.media || project.media.length <= 1) return;
+    AppState.projectMediaIndex += dir;
+    if (AppState.projectMediaIndex >= project.media.length) AppState.projectMediaIndex = 0;
+    if (AppState.projectMediaIndex < 0) AppState.projectMediaIndex = project.media.length - 1;
+    renderProjectMedia();
+}
+
+function setProjectMedia(idx) { AppState.projectMediaIndex = idx; renderProjectMedia(); }
+
+function navigateProject(dir) {
+    let newIndex = AppState.projectIndex + dir;
+    if (newIndex >= portfolioData.projects.length) newIndex = 0;
+    if (newIndex < 0) newIndex = portfolioData.projects.length - 1;
+    openProject(newIndex);
+}
+
+// --- Service Lightbox ---
+function openService(index) {
+    if (typeof portfolioData === 'undefined' || !portfolioData.services[index]) return;
+    
+    AppState.serviceIndex = index;
+    AppState.serviceMediaIndex = 0; 
+    
+    const service = portfolioData.services[index];
+    const lb = document.getElementById('serviceLightbox');
+    
+    document.getElementById('srv-title').textContent = service.title;
+    document.getElementById('srv-icon').className = `fas ${service.icon}`;
+    document.getElementById('srv-desc').innerHTML = `<p>${service.extendedDesc || service.desc}</p>`;
+    
+    renderServiceMedia();
+
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden'; 
+}
+
+function renderServiceMedia() {
+    const service = portfolioData.services[AppState.serviceIndex];
+    const mediaContainer = document.getElementById('srvMedia');
+    const prev = document.getElementById('srvMediaPrev');
+    const next = document.getElementById('srvMediaNext');
+    const dots = document.getElementById('srvMediaDots');
+    
+    if (!service.images || service.images.length === 0) {
+        mediaContainer.innerHTML = `<i class="fas ${service.icon}" style="font-size: 10rem; opacity:0.2; color: var(--primary);"></i>`;
+        prev.style.display = 'none'; next.style.display = 'none'; dots.innerHTML = ''; return;
+    }
+    
+    mediaContainer.innerHTML = `<img src="${service.images[AppState.serviceMediaIndex]}" alt="${service.title}" class="zoomable-image" onclick="handleZoom(event)">`;
+    
+    if (service.images.length > 1) {
+        prev.style.display = 'flex'; next.style.display = 'flex';
+        dots.innerHTML = service.images.map((_, i) => `<div class="media-dot ${i === AppState.serviceMediaIndex ? 'active' : ''}" onclick="setServiceMedia(${i})"></div>`).join('');
+    } else {
+        prev.style.display = 'none'; next.style.display = 'none'; dots.innerHTML = '';
+    }
+}
+
+function changeServiceMedia(dir) {
+    const service = portfolioData.services[AppState.serviceIndex];
+    if (!service.images || service.images.length <= 1) return;
+    AppState.serviceMediaIndex += dir;
+    if (AppState.serviceMediaIndex >= service.images.length) AppState.serviceMediaIndex = 0;
+    if (AppState.serviceMediaIndex < 0) AppState.serviceMediaIndex = service.images.length - 1;
+    renderServiceMedia();
+}
+
+function setServiceMedia(idx) { AppState.serviceMediaIndex = idx; renderServiceMedia(); }
+
+function navigateService(dir) {
+    let newIndex = AppState.serviceIndex + dir;
+    if (newIndex >= portfolioData.services.length) newIndex = 0;
+    if (newIndex < 0) newIndex = portfolioData.services.length - 1;
+    openService(newIndex);
+}
+
+// --- Dynamic Rendering ---
+function renderDynamicContent() {
+    if (typeof portfolioData === 'undefined') return;
+
+    // Personal & Social Links
+    if (portfolioData.personal) {
+        const socials = portfolioData.personal.socials;
+        if (socials) {
+            document.querySelectorAll('.discord-link').forEach(el => el.href = socials.discordServer);
+            document.querySelectorAll('.instagram-link').forEach(el => el.href = socials.instagram);
+            document.querySelectorAll('.reddit-link').forEach(el => el.href = socials.reddit);
+            document.querySelectorAll('.fab-link').forEach(el => el.href = socials.fab);
+            
+            const discordDm = document.querySelector('.discord-dm-link');
+            if (discordDm) discordDm.href = socials.discordDm;
+        }
+
+        const emailLink = document.querySelector('.contact-email');
+        if (emailLink) { emailLink.href = `mailto:${portfolioData.personal.email}`; emailLink.textContent = portfolioData.personal.email; }
+        
+        const statusBadge = document.getElementById('availabilityStatus');
+        if (statusBadge) statusBadge.textContent = portfolioData.personal.status || "Available";
+        
+        const formKey = document.getElementById('web3formsKey');
+        if (formKey) formKey.value = portfolioData.personal.web3formsKey || "";
+    }
+    
+    // Text blocks
+    if (document.querySelector('.hero-title .title-text')) document.querySelector('.hero-title .title-text').textContent = portfolioData.hero.title;
+    if (document.querySelector('.hero-description')) document.querySelector('.hero-description').textContent = portfolioData.hero.description;
+    if (document.querySelector('.about-text')) document.querySelector('.about-text').textContent = portfolioData.about.text;
+    
+    // Stats
+    if (portfolioData.about) {
+        const counts = { '.projects-count': 'projectsDelivered', '.repeat-clients': 'repeatClients', '.client-rating': 'clientRating' };
+        Object.keys(counts).forEach(selector => {
+            const el = document.querySelector(selector);
+            if (el) el.setAttribute('data-count', portfolioData.about[counts[selector]]);
         });
-        desc.appendChild(featureList); // Append to description area
+    }
+
+    // Services (Click to open Service Lightbox)
+    const servicesGrid = document.getElementById('servicesGrid');
+    if (servicesGrid && portfolioData.services) {
+        servicesGrid.innerHTML = portfolioData.services.map((service, index) => `
+            <div class="service-card glass-panel fade-in" onclick="openService(${index})">
+                <div class="service-icon"><i class="fas ${service.icon}"></i></div>
+                <h3 class="service-title">${service.title}</h3>
+                <p class="service-desc">${service.desc}</p>
+                <span class="service-cta">View Details <i class="fas fa-arrow-right"></i></span>
+            </div>
+        `).join('');
+    }
+
+    // Testimonials
+    const testGrid = document.getElementById('testimonialsGrid');
+    if (testGrid && portfolioData.testimonials) {
+        testGrid.innerHTML = portfolioData.testimonials.map(review => `
+            <div class="testimonial-card glass-panel fade-in">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p class="testimonial-text">"${review.quote}"</p>
+                <div class="testimonial-author">
+                    <div class="author-info">
+                        <h4 class="author-name">${review.client}</h4>
+                        <span class="author-role">${review.role}</span>
+                    </div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Projects Grid
+    const projContainer = document.querySelector('.projects-grid');
+    if (projContainer && portfolioData.projects) {
+        projContainer.innerHTML = portfolioData.projects.map((proj, index) => `
+            <div class="project-card glass-panel fade-in" onclick="openProject(${index})">
+                <div class="project-image">
+                    <div class="project-overlay">
+                        <div class="project-links">
+                            <span class="project-link"><i class="fas fa-expand-alt"></i></span>
+                        </div>
+                    </div>
+                    ${proj.thumbnail ? `<img src="${proj.thumbnail}" alt="${proj.title}" style="width:100%; height:100%; object-fit:cover;">` : `<div class="project-placeholder"><i class="fas ${proj.icon || 'fa-code'}"></i></div>`}
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">${proj.title}</h3>
+                    <p class="project-description">${proj.desc.substring(0, 110)}...</p>
+                    <div class="project-tags">
+                        ${proj.tags ? proj.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
+                    </div>
+                </div>
+            </div>
+        `).join('');
     }
 }
 
-function calculateDuration(s, e) {
-    const start = new Date(s), end = (e.toLowerCase() === 'present') ? new Date() : new Date(e);
-    let y = end.getFullYear() - start.getFullYear();
-    let m = end.getMonth() - start.getMonth();
-    if (m < 0) { y--; m += 12; }
-    return [y > 0 ? `${y} yr${y > 1 ? 's' : ''}` : '', m > 0 ? `${m} mo${m > 1 ? 's' : ''}` : ''].filter(Boolean).join(' ') || "Less than a month";
-}
+// --- Web3Forms Handler Integration ---
+function initFormHandlers() {
+    const form = document.getElementById('contactForm');
+    const result = document.getElementById('formResult');
+    const submitText = document.getElementById('submitText');
+    const submitIcon = document.getElementById('submitIcon');
 
-function setupAutoResizeTextarea() {
-    document.querySelectorAll("textarea").forEach(tx => tx.addEventListener("input", function () {
-        this.style.height = "auto";
-        this.style.height = (this.scrollHeight) + "px";
-    }));
-}
+    if (!form) return;
 
-// === CANVAS STARFIELD ===
-function initStarfield() {
-    "use strict";
-    var canvas = document.getElementById('canvas'),
-        ctx = canvas.getContext('2d'),
-        w = canvas.width = window.innerWidth,
-        h = canvas.height = window.innerHeight;
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
 
-    // Fetch theme color to tint the stars
-    const bodyStyle = getComputedStyle(document.body);
-    const themeHue = bodyStyle.getPropertyValue('--first-color-hue').trim();
-    var hue = parseInt(themeHue) || 217;
+        submitText.textContent = "Sending Inquiry...";
+        submitIcon.className = "fas fa-spinner fa-spin";
+        result.style.display = "none";
 
-    var stars = [], count = 0, maxStars = 550;
-
-    // Cache star sprite
-    var canvas2 = document.createElement('canvas'), ctx2 = canvas2.getContext('2d');
-    canvas2.width = 100; canvas2.height = 100;
-    var half = canvas2.width / 2, gradient2 = ctx2.createRadialGradient(half, half, 0, half, half, half);
-    gradient2.addColorStop(0.025, 'hsla(' + hue + ', 99%, 99%, 100%)');
-    gradient2.addColorStop(0.1, 'hsla(' + hue + ', 99%, 63%, 60%)');
-    gradient2.addColorStop(0.25, 'hsla(' + hue + ', 64%, 55%, 0%)');
-    ctx2.fillStyle = gradient2; ctx2.beginPath(); ctx2.arc(half, half, half, 0, Math.PI * 2); ctx2.fill();
-
-    function random(min, max) {
-        if (arguments.length < 2) { max = min; min = 0; }
-        if (min > max) { var hold = max; max = min; min = hold; }
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function maxOrbit(x, y) {
-        var max = Math.max(x, y), diameter = Math.round(Math.sqrt(max * max + max * max));
-        return diameter / 2;
-    }
-
-    var Star = function () {
-        this.orbitRadius = random(maxOrbit(w, h));
-        this.radius = random(60, this.orbitRadius) / 12;
-        this.orbitX = w / 2; this.orbitY = h / 2;
-        this.timePassed = random(0, maxStars);
-        this.speed = random(this.orbitRadius) / 1000000;
-        this.alpha = random(2, 10) / 10;
-        count++; stars[count] = this;
-    }
-
-    Star.prototype.draw = function () {
-        var x = Math.sin(this.timePassed) * this.orbitRadius + this.orbitX,
-            y = Math.cos(this.timePassed) * this.orbitRadius + this.orbitY,
-            twinkle = random(10);
-
-        if (twinkle === 1 && this.alpha > 0) this.alpha -= 0.05;
-        else if (twinkle === 2 && this.alpha < 1) this.alpha += 0.05;
-
-        ctx.globalAlpha = this.alpha;
-        ctx.drawImage(canvas2, x - this.radius / 2, y - this.radius / 2, this.radius, this.radius);
-        this.timePassed += this.speed;
-    }
-
-    for (var i = 0; i < maxStars; i++) new Star();
-
-    function animation() {
-        ctx.clearRect(0, 0, w, h);
-        ctx.globalCompositeOperation = 'lighter';
-        for (var i = 1, l = stars.length; i < l; i++) stars[i].draw();
-        ctx.globalCompositeOperation = 'source-over';
-        window.requestAnimationFrame(animation);
-    }
-
-    animation();
-
-    window.addEventListener('resize', () => {
-        if (canvas) { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
-        stars = []; count = 0;
-        for (var i = 0; i < maxStars; i++) new Star();
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = "Inquiry sent successfully! I will get back to you shortly.";
+                result.style.color = "var(--green)";
+                result.style.display = "block";
+                form.reset();
+            } else {
+                result.innerHTML = json.message;
+                result.style.color = "red";
+                result.style.display = "block";
+            }
+        })
+        .catch(error => {
+            result.innerHTML = "Something went wrong! Please email directly.";
+            result.style.color = "red";
+            result.style.display = "block";
+        })
+        .then(function() {
+            submitText.textContent = "Submit Inquiry";
+            submitIcon.className = "fas fa-paper-plane";
+            setTimeout(() => { result.style.display = "none"; }, 6000);
+        });
     });
 }
 
-// === WIDGET: TIME CARD ===
-function initializeTimeCard() {
-    const timeEl = document.getElementById('time-card-text');
-    const subTextEl = document.getElementById('time-card-subtext');
-    const dayEl = document.getElementById('time-card-day');
-    const moonIcon = document.getElementById('time-card-icon');
-    const sunIcon = document.getElementById('time-card-icon-sun');
+// --- Theme & General Setup ---
+function loadPreferences() {
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme) AppState.currentTheme = savedTheme;
+}
 
-    function getDaySuffix(day) {
-        if (day > 3 && day < 21) return 'th';
-        switch (day % 10) {
-            case 1: return "st"; case 2: return "nd"; case 3: return "rd"; default: return "th";
+function initTheme() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    setTheme(AppState.currentTheme);
+}
+
+function toggleTheme() {
+    const themes = ['dark', 'cosmic', 'cyberpunk', 'royal', 'metal', 'hc-gold'];
+    const currentIndex = themes.indexOf(AppState.currentTheme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    const newTheme = themes[nextIndex];
+    setTheme(newTheme);
+    localStorage.setItem('portfolio-theme', newTheme);
+}
+
+function setTheme(theme) {
+    AppState.currentTheme = theme;
+    document.body.classList.remove('theme-cosmic', 'theme-cyberpunk', 'theme-royal', 'theme-metal', 'theme-hc-gold');
+    if (['cosmic', 'cyberpunk', 'royal', 'metal', 'hc-gold'].includes(theme)) {
+        document.body.classList.add(`theme-${theme}`);
+    }
+    updateThemeUI();
+}
+
+function updateThemeUI() {
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        const icon = themeToggle.querySelector('i');
+        if (icon) {
+            const icons = { 'dark': 'fas fa-moon', 'cosmic': 'fas fa-meteor', 'cyberpunk': 'fas fa-bolt', 'royal': 'fas fa-crown', 'metal': 'fas fa-cog', 'hc-gold': 'fas fa-gem' };
+            icon.className = icons[AppState.currentTheme] || 'fas fa-moon';
         }
     }
+}
 
-    function updateTime() {
-        const now = new Date();
-        let hours = now.getHours();
-        const minutes = now.getMinutes();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
+function initScrollEffects() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in, .section').forEach(el => observer.observe(el));
+    
+    const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const stat = entry.target;
+                const targetText = stat.getAttribute('data-count') || "0";
+                const isFloat = targetText.includes('.');
+                const target = parseFloat(targetText);
+                
+                if (typeof anime !== 'undefined') {
+                    anime({
+                        targets: { value: 0 }, value: target, duration: 2000, easing: 'easeOutExpo',
+                        update: anim => {
+                            let val = anim.animatables[0].target.value;
+                            stat.textContent = isFloat ? val.toFixed(1) : Math.floor(val);
+                        }
+                    });
+                } else {
+                    stat.textContent = targetText; 
+                }
+                statObserver.unobserve(stat);
+            }
+        });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-number').forEach(stat => statObserver.observe(stat));
+}
 
-        hours = hours % 12;
-        hours = hours ? hours : 12;
+function initMobileMenu() {
+    document.getElementById('menuToggle')?.addEventListener('click', toggleMobileMenu);
+}
 
-        const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
-        const formattedHours = hours < 10 ? ' ' + hours : hours;
+function toggleMobileMenu() {
+    AppState.isMenuOpen = !AppState.isMenuOpen;
+    document.getElementById('navMenu')?.classList.toggle('active', AppState.isMenuOpen);
+}
 
-        const dayName = now.toLocaleDateString('en-US', { weekday: 'long' });
-        const monthName = now.toLocaleDateString('en-US', { month: 'long' });
-        const dayNumber = now.getDate();
-        const daySuffix = getDaySuffix(dayNumber);
-
-        if (timeEl) timeEl.textContent = `${formattedHours}:${formattedMinutes}`;
-        if (subTextEl) subTextEl.textContent = ampm;
-        if (dayEl) dayEl.textContent = `${dayName}, ${monthName} ${dayNumber}${daySuffix}`;
-
-        // Toggle Sun/Moon icon based on hour
-        const militaryHour = now.getHours();
-        const isDay = militaryHour >= 6 && militaryHour < 18;
-
-        if (isDay) {
-            if (moonIcon) moonIcon.style.display = 'none';
-            if (sunIcon) sunIcon.style.display = 'block';
-        } else {
-            if (moonIcon) moonIcon.style.display = 'block';
-            if (sunIcon) sunIcon.style.display = 'none';
-        }
+function generateParticles() {
+    const container = document.getElementById('particles');
+    if (!container) return;
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.textContent = ['BP', 'UE', 'Node', '()', '{}', 'Client', 'Fix'][Math.floor(Math.random() * 7)];
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+        container.appendChild(particle);
     }
-
-    updateTime();
-    setInterval(updateTime, 10000);
 }
